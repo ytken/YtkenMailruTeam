@@ -4,7 +4,7 @@ A superb idea
 
 ## Команда авторов
 
-- [Александр ???] https://github.com/AlexStanchenko
+- [Александр Галанов] https://github.com/AlexStanchenko
 - [Илья Кусакин] https://github.com/IlyaKusakin
 - [Дмитрий Кочик] https://github.com/dakochik
 - [Анастасия Овчинникова] https://github.com/ytken
