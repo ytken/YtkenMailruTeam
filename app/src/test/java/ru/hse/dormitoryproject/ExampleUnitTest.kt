@@ -1,4 +1,4 @@
-package ru.hse.ytkenmailrutea
+package ru.hse.dormitoryproject
 
 import org.junit.Test
 

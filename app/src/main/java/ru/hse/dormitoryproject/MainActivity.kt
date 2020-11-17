@@ -1,4 +1,4 @@
-package ru.hse.ytkenmailruteam
+package ru.hse.dormitoryproject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
