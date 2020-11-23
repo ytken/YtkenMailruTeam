@@ -2,6 +2,7 @@ package ru.hse.dormitoryproject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -17,6 +18,8 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(setOf(R.id.feedFragment, R.id.tasksFragment, R.id.favouritesFragment, R.id.profileFragment))
         setupActionBarWithNavController(navController, appBarConfiguration)
 
+
+        Log.e("DEBUG_ABCD", "asdasdlaksd")
         bottomNavigationView.setupWithNavController(navController)
     }
 }
