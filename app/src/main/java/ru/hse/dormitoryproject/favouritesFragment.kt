@@ -1,10 +1,16 @@
 package ru.hse.dormitoryproject
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import ru.hse.dormitoryproject.favourites.FavPostAdapter
+import ru.hse.dormitoryproject.newsFeed.PostAdapter
+import ru.hse.dormitoryproject.newsFeed.PostObject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,7 +40,55 @@ class favouritesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favourites, container, false)
+        val view = inflater.inflate(R.layout.fragment_favourites, container, false)
+
+        var data = getFavPosts()
+        val postAdapter = FavPostAdapter(data)
+
+        view?.findViewById<RecyclerView>(R.id.feed_recycler)?.apply {
+            layoutManager = LinearLayoutManager(view.context)
+            adapter = postAdapter
+        }
+
+        return view
+    }
+
+    private fun getFavPosts() : ArrayList<PostObject>{
+        var post = arrayListOf<PostObject>()
+        // Из shared Pref получаем id избранных постов
+        // Получение записей с сервера по сохраненным id / ИЛИ получаем все записи с сервера и отбираем те, чьи id были сохранены.
+        post.add(
+            PostObject(
+                "Тестовый пост #1",
+                "",
+                "описание...",
+                "01.01.0001",
+                "Someone cool",
+                true
+            )
+        )
+        post.add(
+            PostObject(
+                "Тестовый пост #2",
+                "",
+                "описание...",
+                "01.01.0001",
+                "Someone cool",
+                true
+            )
+        )
+        post.add(
+            PostObject(
+                "Тестовый пост #3",
+                "",
+                "описание...",
+                "01.01.0001",
+                "Someone cool",
+                true
+            )
+        )
+
+        return post
     }
 
     companion object {
