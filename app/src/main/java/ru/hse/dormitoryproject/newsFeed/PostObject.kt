@@ -31,5 +31,5 @@ data class PostObject(
     /**
      * Находится ли новость в избранном.
      */
-    val isFavorite : Boolean
+    var isFavorite : Boolean
 )

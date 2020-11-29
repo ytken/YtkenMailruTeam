@@ -68,7 +68,7 @@ class FeedFragment : Fragment() {
                 "",
                 "описание...",
                 "01.01.0001",
-                "Someone cool",
+                "Someone cool ",
                 false
             )
         )
@@ -78,7 +78,7 @@ class FeedFragment : Fragment() {
                 "",
                 "описание...",
                 "01.01.0001",
-                "Someone cool",
+                "Someone cool lllllllllll llllllllllllllllllllllll",
                 false
             )
         )
