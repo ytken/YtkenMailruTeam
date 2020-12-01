@@ -59,7 +59,7 @@ class FeedFragment : Fragment() {
     /**
      * Метод, который получает с сервера объекты типа PostObject, и возвращает все полученные объекты.
      */
-    private fun getPosts(): List<PostObject> {
+    private fun getPosts(): ArrayList<PostObject> {
         var post = arrayListOf<PostObject>()
         // Получение записей с сервера
         post.add(
