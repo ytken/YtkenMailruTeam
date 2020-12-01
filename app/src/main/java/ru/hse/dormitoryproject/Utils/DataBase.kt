@@ -24,15 +24,20 @@ class DataBase() {
         }
 
 
-        fun readAllData(nameCollection: String, adapter: ArrayAdapter<PostObject>) {
+        //fun readAllData(nameCollection: String, adapter: ArrayAdapter<PostObject>, list : ArrayList<PostObject>, dataChangedListener : ()->Unit ) {
+        fun readAllData(nameCollection: String, list : ArrayList<PostObject>, dataChangedListener : ()->Unit ) {
 
             db.collection(nameCollection).get()
                 .addOnSuccessListener { result ->
 
                     val taskList = result.toObjects(PostObject::class.java)
-                    adapter.clear()
-                    adapter.addAll(taskList)
-                    adapter.notifyDataSetChanged()
+                    //adapter.clear()
+                    //adapter.addAll(taskList)
+                    //adapter.notifyDataSetChanged()
+
+                    list.clear()
+                    list.addAll(taskList)
+                    dataChangedListener()
 
                     Log.d("READ_BASE", "Success Getting documents.")
                 }

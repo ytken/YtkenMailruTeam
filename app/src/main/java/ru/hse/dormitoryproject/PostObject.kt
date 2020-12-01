@@ -9,7 +9,8 @@ data class PostObject(
     val descriptor: String? = "",
     val content: String? = "",
     val dateOfPublish: String? = "",
-    var isFavorite: Boolean? = false
+    var isFavorite: Boolean? = false,
+    val author: String? = ""
 ) {
     @Exclude
     fun toMap(): Map<String, Any?> {
@@ -18,7 +19,8 @@ data class PostObject(
             "descriptor" to descriptor,
             "content" to content,
             "dateOfPublish" to dateOfPublish,
-            "isFavorite" to isFavorite
+            "isFavorite" to isFavorite, // Почему-то он всегда придает постам изначальные значения вне зависимости от данных на сервере
+            "author" to author
         )
     }
 }

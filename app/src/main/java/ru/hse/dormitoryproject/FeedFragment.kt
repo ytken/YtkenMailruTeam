@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import ru.hse.dormitoryproject.Utils.DataBase
 import ru.hse.dormitoryproject.newsFeed.PostAdapter
 
 // TODO: Rename parameter arguments, choose names that match
@@ -33,6 +34,9 @@ class FeedFragment : Fragment() {
         val view =  inflater.inflate(R.layout.fragment_feed, container, false)
         var data = getPosts()
         val postAdapter = PostAdapter(data)
+
+        val sth = {postAdapter.notifyDataSetChanged()}
+        DataBase.readAllData("PageWork", data, sth)
 
         view?.findViewById<RecyclerView>(R.id.feed_recycler)?.apply {
             layoutManager = LinearLayoutManager(view.context)
