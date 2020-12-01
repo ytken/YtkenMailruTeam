@@ -1,8 +1,11 @@
 package ru.hse.dormitoryproject
 
 import android.os.Bundle
+import android.os.Message
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.hse.dormitoryproject.newsFeed.PostAdapter
@@ -55,7 +58,7 @@ class FeedFragment : Fragment() {
     /**
      * Метод, который получает с сервера объекты типа PostObject, и возвращает все полученные объекты.
      */
-    private fun getPosts(): ArrayList<PostObject> {
+    private fun getPosts(): List<PostObject> {
         var post = arrayListOf<PostObject>()
         // Получение записей с сервера
         post.add(
@@ -64,7 +67,7 @@ class FeedFragment : Fragment() {
                 "",
                 "описание...",
                 "01.01.0001",
-
+                "Someone cool ",
                 false
             )
         )
@@ -74,6 +77,7 @@ class FeedFragment : Fragment() {
                 "",
                 "описание...",
                 "01.01.0001",
+                "Someone cool lllllllllll llllllllllllllllllllllll",
                 false
             )
         )
@@ -83,6 +87,7 @@ class FeedFragment : Fragment() {
                 "",
                 "описание...",
                 "01.01.0001",
+                "Someone cool",
                 false
             )
         )
