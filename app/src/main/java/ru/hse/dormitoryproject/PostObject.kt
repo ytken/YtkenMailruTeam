@@ -9,7 +9,7 @@ data class PostObject(
     val descriptor: String? = "",
     val content: String? = "",
     val dateOfPublish: String? = "",
-    val isFavorite: Boolean? = false
+    var isFavorite: Boolean? = false
 ) {
     @Exclude
     fun toMap(): Map<String, Any?> {

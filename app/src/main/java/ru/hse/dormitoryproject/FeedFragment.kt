@@ -1,10 +1,11 @@
 package ru.hse.dormitoryproject
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import ru.hse.dormitoryproject.newsFeed.PostAdapter
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -63,7 +64,7 @@ class FeedFragment : Fragment() {
                 "",
                 "описание...",
                 "01.01.0001",
-                "Someone cool ",
+
                 false
             )
         )
@@ -73,7 +74,6 @@ class FeedFragment : Fragment() {
                 "",
                 "описание...",
                 "01.01.0001",
-                "Someone cool lllllllllll llllllllllllllllllllllll",
                 false
             )
         )
@@ -83,7 +83,6 @@ class FeedFragment : Fragment() {
                 "",
                 "описание...",
                 "01.01.0001",
-                "Someone cool",
                 false
             )
         )
