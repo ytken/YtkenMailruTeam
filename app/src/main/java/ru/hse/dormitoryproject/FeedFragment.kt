@@ -96,6 +96,8 @@ class FeedFragment : Fragment() {
         return post
     }
 
+    // TODO: Add 'onSave(+Restore)InstanceState' to save instance after screen rotation. But before this we need to create local DB.
+
     companion object {
         /**
          * Use this factory method to create a new instance of
