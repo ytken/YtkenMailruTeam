@@ -6,9 +6,11 @@
     tools:context=".FeedFragment">
 
     <TextView
+        android:id="@+id/text_test"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Посты из ленты"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:text="Посты из ленты" />
+
 
 </FrameLayout>
