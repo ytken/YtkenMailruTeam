@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "903374722668",
+    "firebase_url": "https://mailproject-dc64a.firebaseio.com",
+    "project_id": "mailproject-dc64a",
+    "storage_bucket": "mailproject-dc64a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:903374722668:android:e83a721a88710c6cb8ea49",
+        "android_client_info": {
+          "package_name": "ru.hse.dormitoryproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "903374722668-gpm9729vlpea1hleoqfacd4l45kuqr17.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3wFi2KykV855f0CqxbZOq6_iDkyX_dX0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "903374722668-gpm9729vlpea1hleoqfacd4l45kuqr17.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
