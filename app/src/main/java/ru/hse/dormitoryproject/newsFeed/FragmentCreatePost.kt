@@ -34,7 +34,7 @@ class FragmentCreatePost(private val updateNewsFeed:()->Unit) : DialogFragment()
 
             val tittleText = tittle.text.toString()
             val contentText = content.text.toString()
-            val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+            val sdf = SimpleDateFormat("dd/M/yyyy")
             val currentDate = sdf.format(Date())
             val author = "Alex"
 
