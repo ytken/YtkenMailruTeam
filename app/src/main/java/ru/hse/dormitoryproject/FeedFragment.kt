@@ -1,14 +1,13 @@
 package ru.hse.dormitoryproject
 
 import android.os.Bundle
-import android.os.Message
-import android.util.Log
 import android.view.*
+import android.widget.ImageButton
 import androidx.fragment.app.Fragment
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.hse.dormitoryproject.Utils.DataBase
+import ru.hse.dormitoryproject.newsFeed.FragmentCreatePost
 import ru.hse.dormitoryproject.newsFeed.PostAdapter
 
 // TODO: Rename parameter arguments, choose names that match
@@ -26,22 +25,40 @@ class FeedFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_feed, container, false)
         var data = getPosts()
         val postAdapter = PostAdapter(data)
 
-        val sth = {postAdapter.notifyDataSetChanged()}
-        DataBase.readAllData("PageWork", data, sth)
+        val updateNewsFeed = {
+            val sth = { postAdapter.notifyDataSetChanged() }
+            DataBase.readAllData("PageWork", data, sth)
+        }
+
 
         view?.findViewById<RecyclerView>(R.id.feed_recycler)?.apply {
             layoutManager = LinearLayoutManager(view.context)
             adapter = postAdapter
         }
+
+
+        val btn = view.findViewById<ImageButton>(R.id.feed_btn_new_post)
+        btn.setOnClickListener {
+
+            val fragmentManager = activity?.supportFragmentManager
+            val fragmentCreatePost: FragmentCreatePost = FragmentCreatePost(updateNewsFeed)
+            if (fragmentManager != null) {
+                fragmentCreatePost.show(fragmentManager,"CREATE_POST")
+            }
+
+        }
+
+
+
+
+
         return view
     }
 
