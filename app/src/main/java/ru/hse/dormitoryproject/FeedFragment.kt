@@ -37,6 +37,7 @@ class FeedFragment : Fragment() {
             DataBase.readAllData("PageWork", data, sth)
         }
 
+        updateNewsFeed.invoke()
 
         view?.findViewById<RecyclerView>(R.id.feed_recycler)?.apply {
             layoutManager = LinearLayoutManager(view.context)
