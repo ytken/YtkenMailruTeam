@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">DormitoryProject</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="remove">Remove</string>
+    <string name="tag_search_fragment">SEARCH_TAG</string>
+    <string name="vk_label">ВК  </string>
+    <string name="default_vk">No info</string>
+    <string name="login_default">Login</string>
+    <string name="button_friends">подписки</string>
+    <string name="coin_default">0</string>
+    <string name="coin_label">Запас валюты</string>
+    <string name="rate_default">1</string>
+    <string name="rate_label">Рейтинг</string>
 </resources>
