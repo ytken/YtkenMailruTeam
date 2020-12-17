@@ -5,4 +5,6 @@
     <string name="feed_menu_option_news">Новости</string>
     <string name="feed_menu_option_subscriptions">Подписки</string>
     <string name="favourite_posts_ids">FAV_ID</string>
+    <string name="feed_task_available_reward_title">Награда:</string>
+    <string name="feed_task_is_finished_btn_text">Сообщить о выполнении</string>
 </resources>

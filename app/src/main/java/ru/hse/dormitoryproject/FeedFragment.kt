@@ -25,6 +25,8 @@ class FeedFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    // TODO: Добавить SwipeRefreshLayout и возможность обновления ленты
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -55,10 +57,6 @@ class FeedFragment : Fragment() {
             }
 
         }
-
-
-
-
 
         return view
     }
