@@ -2,12 +2,16 @@
     <string name="app_name">DormitoryProject</string>
     <string name="remove">Remove</string>
     <string name="tag_search_fragment">SEARCH_TAG</string>
-    <string name="vk_label">ВК  </string>
+    <string name="tag_profile_from_search">PROFILE_FROM_SEARCH_TAG</string>
+    <string name="vk_label">ВК</string>
     <string name="default_vk">No info</string>
-    <string name="login_default">Login</string>
+    <string name="name_default">Login</string>
+    <string name="surname_default">Loginovich</string>
     <string name="button_friends">подписки</string>
     <string name="coin_default">0</string>
     <string name="coin_label">Запас валюты</string>
     <string name="rate_default">1</string>
     <string name="rate_label">Рейтинг</string>
+    <string name="search_title">Поиск друзей</string>
+    <string name="name">Name</string>
 </resources>
