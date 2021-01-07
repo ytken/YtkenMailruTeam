@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/post_fav_btn_margin"
-                android:background="@drawable/ic_baseline_star_not_chosen"/>
+                android:background="@drawable/ic_baseline_star_not_chosen" />
         </LinearLayout>
     </LinearLayout>
 
@@ -60,18 +60,27 @@
             android:layout_weight="2"
             android:orientation="vertical">
 
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/post_title_name"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
+                android:maxLines="1"
                 android:textSize="@dimen/post_title_text_size" />
-                <TextView
-                    android:id="@+id/post_desc_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/post_description_margin_horizontal"
-                    android:textSize="@dimen/post_description_text_size" />
+            </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/post_desc_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/post_description_margin_horizontal"
+                android:layout_marginBottom="10dp"
+                android:ellipsize="end"
+                android:maxLines="8"
+                android:textSize="@dimen/post_description_text_size" />
         </LinearLayout>
 
         <LinearLayout

@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.*
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.hse.dormitoryproject.Utils.DataBase
 import ru.hse.dormitoryproject.newsFeed.FragmentCreatePost
+import ru.hse.dormitoryproject.newsFeed.FragmentWholePost
 import ru.hse.dormitoryproject.newsFeed.PostAdapter
 
 // TODO: Rename parameter arguments, choose names that match
@@ -32,7 +35,7 @@ class FeedFragment : Fragment() {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_feed, container, false)
         var data = getPosts()
-        val postAdapter = PostAdapter(data)
+        val postAdapter = PostAdapter(data, activity?.supportFragmentManager,::showPost)
 
         val updateNewsFeed = {
             val sth = { postAdapter.notifyDataSetChanged() }
@@ -112,7 +115,12 @@ class FeedFragment : Fragment() {
         return post
     }
 
-    companion object {
+    companion object FeedFragments{
+        @JvmStatic
+        fun myFyn(){
+
+        }
+
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
@@ -130,5 +138,12 @@ class FeedFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+
+        fun showPost(postObject : PostObject, fragmentManager  : FragmentManager?, notifier : ()->Unit){
+            val fragmentWholePost = FragmentWholePost(postObject, notifier)
+            if (fragmentManager != null) {
+                fragmentWholePost.show(fragmentManager,"SHOW_POST")
+            }
+        }
     }
 }

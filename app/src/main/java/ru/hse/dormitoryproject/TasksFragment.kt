@@ -10,6 +10,7 @@ import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import ru.hse.dormitoryproject.tasksFeeds.CustomPageTransformer
 import ru.hse.dormitoryproject.tasksFeeds.PostsFragmentPageAdapter
 
 // TODO: Rename parameter arguments, choose names that match
@@ -45,13 +46,14 @@ class TasksFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val viewPager = view.findViewById<ViewPager2>(R.id.tasks_view_pager)
+        viewPager.setPageTransformer(CustomPageTransformer())
         viewPager.adapter = PostsFragmentPageAdapter(requireActivity().supportFragmentManager, lifecycle)
         val tabLayout = view.findViewById<TabLayout>(R.id.tasks_tab_layout)
         TabLayoutMediator(tabLayout, viewPager){tab,position ->tab.text= titles[position]}.attach()
     }
 
     companion object {
-        val titles = arrayOf("Доступные", "Выполняемые", "Ваши") // TODO: как-то получше назвать заголовки
+        val titles = arrayOf("Доступные", "Ваши задачи", "Нужно выполнить")
 
         /**
          * Use this factory method to create a new instance of

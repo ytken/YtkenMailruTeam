@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.hse.dormitoryproject.PostObject
 import ru.hse.dormitoryproject.R
 
-class FavPostAdapter(private var data: ArrayList<PostObject>) :
+class FavPostAdapter(private var data: ArrayList<PostObject>, private val fManager : FragmentManager?,
+                     private val funListener : (PostObject, FragmentManager?, ()->Unit)->Unit) :
     RecyclerView.Adapter<FavPostViewHolder>() {
     lateinit var parent: ViewGroup;
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavPostViewHolder {
@@ -22,6 +23,7 @@ class FavPostAdapter(private var data: ArrayList<PostObject>) :
 
     override fun onBindViewHolder(holder: FavPostViewHolder, position: Int) {
         val item = data[position]
+        holder.itemView.setOnClickListener { funListener(item, fManager, ::notifyDataSetChanged) } // Нет записи на сревер
         holder.bind(item) { it -> removeItem(it) }
 
     }
