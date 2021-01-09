@@ -65,12 +65,6 @@ class DataBase() {
             }
         }
 
-//        private fun downloadImage(ref : String?, imageView: ImageView){
-//            if(ref != null && ref != ""){
-//                Glide
-//            }
-//        }
-
         //fun readAllData(nameCollection: String, adapter: ArrayAdapter<PostObject>, list : ArrayList<PostObject>, dataChangedListener : ()->Unit ) {
         fun readAllData(
             nameCollection: String,

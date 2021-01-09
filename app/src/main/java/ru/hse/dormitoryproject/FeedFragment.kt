@@ -1,5 +1,6 @@
 package ru.hse.dormitoryproject
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.*
 import android.widget.ImageButton
@@ -8,6 +9,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import ru.hse.dormitoryproject.Utils.DataBase
 import ru.hse.dormitoryproject.newsFeed.FragmentCreatePost
 import ru.hse.dormitoryproject.newsFeed.FragmentWholePost
@@ -27,6 +29,7 @@ class FeedFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private var posts : ArrayList<PostObject> = ArrayList()
 
     // TODO: Добавить SwipeRefreshLayout и возможность обновления ленты
 
@@ -34,12 +37,15 @@ class FeedFragment : Fragment() {
         savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_feed, container, false)
-        var data = getPosts()
-        val postAdapter = PostAdapter(data, activity?.supportFragmentManager,::showPost)
+        //var data = getPosts()
+        val postAdapter = PostAdapter(posts, activity?.supportFragmentManager,::showPost)
+        val refresh = view.findViewById<SwipeRefreshLayout>(R.id.swipeRefresh)
+
+        refresh.setColorScheme(R.color.first_refresh_color, R.color.second_refresh_color, R.color.third_refresh_color, R.color.fourth_refresh_color)
 
         val updateNewsFeed = {
-            val sth = { postAdapter.notifyDataSetChanged() }
-            DataBase.readAllData("PageWork", data, sth)
+            val sth = { postAdapter.notifyDataSetChanged();  refresh.isRefreshing = false}
+            DataBase.readAllData("PageWork", posts, sth)
         }
 
         updateNewsFeed.invoke()
@@ -59,6 +65,10 @@ class FeedFragment : Fragment() {
                 fragmentCreatePost.show(fragmentManager,"CREATE_POST")
             }
 
+        }
+
+        refresh.setOnRefreshListener {
+            updateNewsFeed.invoke()
         }
 
         return view

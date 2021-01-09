@@ -13,13 +13,18 @@
         android:gravity="center"
         android:text="Вероятно, тут будут фильтры" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/feed_recycler"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="9"
-        tools:context=".FeedFragment" />
+        android:layout_weight="9">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/feed_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".FeedFragment" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
 </LinearLayout>
