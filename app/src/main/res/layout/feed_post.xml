@@ -12,39 +12,36 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3">
+        <ImageView
+            android:id="@+id/feed_task_available_prof_pic"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_task_def_prof_pic_face" />
 
-            <HorizontalScrollView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/post_author_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="@dimen/post_auth_name_margin"
-                    android:textSize="@dimen/post_auth_name_text_size" />
-            </HorizontalScrollView>
-        </LinearLayout>
-
-        <LinearLayout
+        <HorizontalScrollView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_marginHorizontal="5dp"
+            android:layout_weight="1">
 
-            <ImageButton
-                android:id="@+id/post_add_to_fav"
+            <TextView
+                android:id="@+id/post_author_name"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/post_fav_btn_margin"
-                android:background="@drawable/ic_baseline_star_not_chosen" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/post_auth_name_margin"
+                android:textSize="@dimen/post_auth_name_text_size" />
+        </HorizontalScrollView>
+
+
+        <ImageButton
+            android:id="@+id/post_add_to_fav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/post_fav_btn_margin"
+            android:background="@drawable/ic_baseline_star_not_chosen" />
     </LinearLayout>
 
     <LinearLayout
@@ -62,14 +59,16 @@
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/post_title_name"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:maxLines="1"
-                android:textSize="@dimen/post_title_text_size" />
+                android:layout_marginHorizontal="5dp">
+
+                <TextView
+                    android:id="@+id/post_title_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/post_title_text_size" />
             </HorizontalScrollView>
 
             <TextView
@@ -92,15 +91,16 @@
             <ImageView
                 android:id="@+id/post_pic"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="200dp"
                 android:layout_gravity="center"
-                android:layout_weight="7" />
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="3" />
 
             <TextView
                 android:id="@+id/post_date_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_marginVertical="5dp"
                 android:textAlignment="center"
                 android:textSize="@dimen/post_date_text_size" />
         </LinearLayout>

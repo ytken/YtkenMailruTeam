@@ -3,10 +3,14 @@ package ru.hse.dormitoryproject.newsFeed
 import android.util.Log
 import android.view.View
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import ru.hse.dormitoryproject.PostObject
 import ru.hse.dormitoryproject.R
+import java.lang.IllegalArgumentException
 
 class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(newObject : PostObject) {
@@ -33,6 +37,16 @@ class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 btn.setBackgroundResource(R.drawable.ic_baseline_star_chosen);
                 newObject.isFavorite=true;
             }
+        }
+
+        val picture = itemView.findViewById<ImageView>(R.id.post_pic)
+        try {
+            Picasso.get().load(newObject.storageRef)
+                .into(picture)
+        }
+        catch (e : IllegalArgumentException){
+            Toast.makeText(itemView.context, "Невозможно загрузить изображение", Toast.LENGTH_SHORT).show()
+            picture.setImageResource(R.drawable.your_advertisement)
         }
 
         // + Save/remove to local DB

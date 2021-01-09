@@ -33,6 +33,19 @@
         android:minHeight="50dp"
         android:textSize="18sp" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Выберите изображение(нажмите):"/>
+
+    <ImageView
+        android:id="@+id/choose_pic_img"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_margin="10dp"
+        android:src="@drawable/your_advertisement"/>
+
     <Button
         android:id="@+id/button_push"
         android:layout_width="wrap_content"
