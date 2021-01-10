@@ -51,7 +51,8 @@ class profileFragment : Fragment() {
         textCurr.text = currencyNumber.toString()
         textVK.text = linkVK
         textRate.text = rateNumber.toString()
-        imageProf.setImageResource(R.drawable.nusha)
+        //imageProf.setImageResource(R.drawable.nusha) // Этого ресурса нет, я не знаю, где его взять, пока что заменио на это:
+        imageProf.setImageResource(R.drawable.your_advertisement)
 
         /*buttonFriends = v.findViewById(R.id.button_login_friends)
         buttonFriends.setOnClickListener{
