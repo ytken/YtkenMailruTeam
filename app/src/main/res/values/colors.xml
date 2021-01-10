@@ -7,7 +7,21 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="primary_color">#aa88bb</color>
     <color name="item_color">#ffaa44</color>
-    <color name="post_background_color">#D7E0E0</color>
+    <color name="btn_color">#00A303</color>
+    <color name="background_primary_color">#E06C00</color>
+
+    <color name="primary_color">#aa88bb</color>
+    <color name="primary_color_v2">#A65B00</color>
+
+    <color name="post_background_color">#FFFFFFFF</color>
+    <color name="post_background_color_v2">#FFFFFFFF</color>
+
+    <color name="recycler_background">#D9D9D9</color>
+
+    <color name="first_refresh_color">#4285F4</color>
+    <color name="second_refresh_color">#34A853</color>
+    <color name="third_refresh_color">#FBBC05</color>
+    <color name="fourth_refresh_color">#EA4335</color>
+
 </resources>

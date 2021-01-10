@@ -1,7 +1,8 @@
-package ru.hse.dormitoryproject.Utils
+package ru.hse.dormitoryproject
 
 import com.google.firebase.firestore.Exclude
 import com.google.firebase.firestore.IgnoreExtraProperties
+import com.google.firebase.storage.StorageReference
 
 @IgnoreExtraProperties
 data class PostObject(
@@ -10,7 +11,8 @@ data class PostObject(
     val content: String? = "",
     val dateOfPublish: String? = "",
     var isFavorite: Boolean? = false,
-    val author: String? =""
+    val author: String? = "",
+    var storageRef : String? = ""
 ) {
     @Exclude
     fun toMap(): Map<String, Any?> {
@@ -20,7 +22,8 @@ data class PostObject(
             "content" to content,
             "dateOfPublish" to dateOfPublish,
             "isFavorite" to isFavorite, // Почему-то он всегда придает постам изначальные значения вне зависимости от данных на сервере
-            "author" to author
+            "author" to author,
+            "storageRef" to storageRef
         )
     }
 }

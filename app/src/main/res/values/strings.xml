@@ -1,8 +1,23 @@
 <resources>
     <string name="app_name">DormitoryProject</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="remove">Remove</string>
+    <string name="tag_search_fragment">SEARCH_TAG</string>
+    <string name="tag_profile_from_search">PROFILE_FROM_SEARCH_TAG</string>
+    <string name="vk_label">ВК</string>
+    <string name="default_vk">No info</string>
+    <string name="name_default">Login</string>
+    <string name="surname_default">Loginovich</string>
+    <string name="button_friends">подписки</string>
+    <string name="coin_default">0</string>
+    <string name="coin_label">Запас валюты</string>
+    <string name="rate_default">1</string>
+    <string name="rate_label">Рейтинг</string>
+    <string name="search_title">Поиск друзей</string>
+    <string name="name">Name</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="feed_menu_option_news">Новости</string>
     <string name="feed_menu_option_subscriptions">Подписки</string>
     <string name="favourite_posts_ids">FAV_ID</string>
+    <string name="feed_task_available_reward_title">Награда:</string>
+    <string name="feed_task_is_finished_btn_text">Сообщить о выполнении</string>
 </resources>

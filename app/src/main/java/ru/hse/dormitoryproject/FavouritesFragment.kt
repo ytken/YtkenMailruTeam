@@ -1,14 +1,17 @@
 package ru.hse.dormitoryproject
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import ru.hse.dormitoryproject.Utils.PostObject
+import ru.hse.dormitoryproject.Utils.DataBase
 import ru.hse.dormitoryproject.favourites.FavPostAdapter
+import ru.hse.dormitoryproject.newsFeed.PostAdapter
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,7 +44,13 @@ class favouritesFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_favourites, container, false)
 
         var data = getFavPosts()
-        val postAdapter = FavPostAdapter(data)
+        val postAdapter = FavPostAdapter(data, activity?.supportFragmentManager) { a, b, c ->
+            FeedFragment.showPost(
+                a,
+                b,
+                c
+            )
+        }
 
         view?.findViewById<RecyclerView>(R.id.feed_recycler)?.apply {
             layoutManager = LinearLayoutManager(view.context)
@@ -103,7 +112,7 @@ class favouritesFragment : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            favouritesFragment().apply {
+            FavouritesFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

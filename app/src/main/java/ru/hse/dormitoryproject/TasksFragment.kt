@@ -5,6 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
+import ru.hse.dormitoryproject.tasksFeeds.CustomPageTransformer
+import ru.hse.dormitoryproject.tasksFeeds.PostsFragmentPageAdapter
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,11 +40,21 @@ class TasksFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tasks, container, false)
+        return  inflater.inflate(R.layout.fragment_tasks, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val viewPager = view.findViewById<ViewPager2>(R.id.tasks_view_pager)
+        viewPager.setPageTransformer(CustomPageTransformer())
+        viewPager.adapter = PostsFragmentPageAdapter(requireActivity().supportFragmentManager, lifecycle)
+        val tabLayout = view.findViewById<TabLayout>(R.id.tasks_tab_layout)
+        TabLayoutMediator(tabLayout, viewPager){tab,position ->tab.text= titles[position]}.attach()
     }
 
     companion object {
+        val titles = arrayOf("Доступные", "Ваши задачи", "Нужно выполнить")
+
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.

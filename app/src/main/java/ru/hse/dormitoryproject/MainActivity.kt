@@ -1,13 +1,10 @@
 package ru.hse.dormitoryproject
 
-
-import android.content.Context
 import android.content.Intent
-import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -42,6 +39,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_DormitoryProject_Beta)
+
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_selection_sign_in)
@@ -92,8 +91,36 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             )
             setupActionBarWithNavController(navController, appBarConfiguration)
             bottomNavigationView.setupWithNavController(navController)
-            DataBase.createCurrentUser(this)
 
+
+            val toolbar = findViewById<Toolbar>(R.id.toolbar)
+            toolbar.title = resources.getString(R.string.app_name)
+            toolbar.isClickable = true
+
+            toolbar.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.go_to_search -> {
+                        val intent = Intent(this@MainActivity, SearchActivity::class.java)
+                        startActivity(intent)
+
+                    }
+                    R.id.action_cancel -> {
+                        val prevFragment =
+                            supportFragmentManager.findFragmentByTag(resources.getString(R.string.tag_search_fragment))
+                        if (prevFragment != null)
+                            supportFragmentManager.beginTransaction().remove(prevFragment).commit()
+                    }
+                    else -> Toast.makeText(this@MainActivity, "No activity!", Toast.LENGTH_SHORT)
+                        .show()
+                }
+                true
+
+
+            }
+
+
+
+            DataBase.createCurrentUser(this)
         }
         // Пользоавтель еще не авторизовался
         else {
@@ -104,16 +131,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
+
+
     override fun onClick(it: View) {
         if (it.id == R.id.btn_sign_in_google) {
             signInGoogle()
         }
     }
 
-    private fun signInGoogle() {
-        val signInIntent = googleSignInClient.signInIntent
-        startActivityForResult(signInIntent, RC_SIGN_IN)
-    }
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
