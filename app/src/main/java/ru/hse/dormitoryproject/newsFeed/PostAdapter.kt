@@ -3,7 +3,7 @@ package ru.hse.dormitoryproject.newsFeed
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import ru.hse.dormitoryproject.PostObject
+import ru.hse.dormitoryproject.Utils.PostObject
 import ru.hse.dormitoryproject.R
 
 class PostAdapter(private val data: ArrayList<PostObject>) :

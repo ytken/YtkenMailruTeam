@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.view.*
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.hse.dormitoryproject.Utils.DataBase
-import ru.hse.dormitoryproject.newsFeed.FragmentCreatePost
+import ru.hse.dormitoryproject.Utils.PostObject
 import ru.hse.dormitoryproject.newsFeed.PostAdapter
 
 // TODO: Rename parameter arguments, choose names that match
@@ -29,15 +30,12 @@ class FeedFragment : Fragment() {
         savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_feed, container, false)
-        var data = getPosts()
+        var data = arrayListOf<PostObject>()
         val postAdapter = PostAdapter(data)
 
-        val updateNewsFeed = {
             val sth = { postAdapter.notifyDataSetChanged() }
-            DataBase.readAllData("PageWork", data, sth)
-        }
+            DataBase.readAllPost( data, sth)
 
-        updateNewsFeed.invoke()
 
         view?.findViewById<RecyclerView>(R.id.feed_recycler)?.apply {
             layoutManager = LinearLayoutManager(view.context)
@@ -47,16 +45,8 @@ class FeedFragment : Fragment() {
 
         val btn = view.findViewById<ImageButton>(R.id.feed_btn_new_post)
         btn.setOnClickListener {
-
-            val fragmentManager = activity?.supportFragmentManager
-            val fragmentCreatePost: FragmentCreatePost = FragmentCreatePost(updateNewsFeed)
-            if (fragmentManager != null) {
-                fragmentCreatePost.show(fragmentManager,"CREATE_POST")
-            }
-
+            findNavController().navigate(R.id.createPostFragment)
         }
-
-
 
 
 
@@ -77,42 +67,6 @@ class FeedFragment : Fragment() {
         inflater.inflate(R.menu.feed_menu, menu)
     }
 
-    /**
-     * Метод, который получает с сервера объекты типа PostObject, и возвращает все полученные объекты.
-     */
-    private fun getPosts(): ArrayList<PostObject> {
-        var post = arrayListOf<PostObject>()
-        // Получение записей с сервера
-        post.add(
-            PostObject(
-                "Тестовый пост #1",
-                "",
-                "описание...",
-                "01.01.0001",
-                false
-            )
-        )
-        post.add(
-            PostObject(
-                "Тестовый пост #2",
-                "",
-                "описание...",
-                "01.01.0001",
-                false
-            )
-        )
-        post.add(
-            PostObject(
-                "Тестовый пост #3",
-                "",
-                "описание...",
-                "01.01.0001",
-                false
-            )
-        )
-
-        return post
-    }
 
     companion object {
         /**

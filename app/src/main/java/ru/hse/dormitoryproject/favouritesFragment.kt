@@ -1,17 +1,14 @@
 package ru.hse.dormitoryproject
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import ru.hse.dormitoryproject.Utils.DataBase
+import ru.hse.dormitoryproject.Utils.PostObject
 import ru.hse.dormitoryproject.favourites.FavPostAdapter
-import ru.hse.dormitoryproject.newsFeed.PostAdapter
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -64,7 +61,8 @@ class favouritesFragment : Fragment() {
                 "",
                 "описание...",
                 "01.01.0001",
-                true
+                true,
+                "sdf"
             )
         )
         post.add(
@@ -73,7 +71,8 @@ class favouritesFragment : Fragment() {
                 "",
                 "описание...",
                 "01.01.0001",
-                true
+                true,
+                "sdf"
             )
         )
         post.add(
@@ -82,7 +81,8 @@ class favouritesFragment : Fragment() {
                 "",
                 "описание...",
                 "01.01.0001",
-                true
+                true,
+                "sdf"
             )
         )
 

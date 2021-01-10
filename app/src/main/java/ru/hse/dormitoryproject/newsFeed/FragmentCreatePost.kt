@@ -6,15 +6,16 @@ import android.view.*
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.fragment.app.DialogFragment
-import ru.hse.dormitoryproject.PostObject
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import ru.hse.dormitoryproject.Utils.PostObject
 import ru.hse.dormitoryproject.R
 import ru.hse.dormitoryproject.Utils.DataBase
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class FragmentCreatePost(private val updateNewsFeed:()->Unit) : DialogFragment() {
+class FragmentCreatePost() : Fragment() {
 
 
     @SuppressLint("SimpleDateFormat")
@@ -38,6 +39,7 @@ class FragmentCreatePost(private val updateNewsFeed:()->Unit) : DialogFragment()
             val currentDate = sdf.format(Date())
             val author = "Alex"
 
+
             if (tittleText.isEmpty()) {
                 Toast.makeText(context, TOAST_NULL_TITTLE, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -49,11 +51,9 @@ class FragmentCreatePost(private val updateNewsFeed:()->Unit) : DialogFragment()
             }
 
             val post = PostObject(tittleText, "descriptor", contentText, currentDate, false, author)
-            DataBase.writeToBase(context, post, NAME_COLLECTION)
-            this.dismiss()
-            updateNewsFeed.invoke()
+            DataBase.writePost(context, post)
+            findNavController().navigate(R.id.feedFragment)
         }
-
 
         return view
     }
@@ -64,7 +64,6 @@ class FragmentCreatePost(private val updateNewsFeed:()->Unit) : DialogFragment()
 
 
     companion object {
-        private const val NAME_COLLECTION = "PageWork"
         private const val TOAST_NULL_TITTLE = "Please enter the title before clicking the button"
         private const val TOAST_NULL_CONTENT = "Please enter the content before clicking the button"
     }

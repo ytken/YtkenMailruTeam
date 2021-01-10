@@ -1,4 +1,4 @@
-package ru.hse.dormitoryproject
+package ru.hse.dormitoryproject.Utils
 
 import com.google.firebase.firestore.Exclude
 import com.google.firebase.firestore.IgnoreExtraProperties
@@ -10,7 +10,7 @@ data class PostObject(
     val content: String? = "",
     val dateOfPublish: String? = "",
     var isFavorite: Boolean? = false,
-    val author: String? = ""
+    val author: String? =""
 ) {
     @Exclude
     fun toMap(): Map<String, Any?> {
