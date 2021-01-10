@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="item_color">#ffaa44</color>
     <color name="btn_color">#00A303</color>
+    <color name="background_primary_color">#E06C00</color>
 
     <color name="primary_color">#aa88bb</color>
     <color name="primary_color_v2">#A65B00</color>
