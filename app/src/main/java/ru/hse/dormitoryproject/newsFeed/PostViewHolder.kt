@@ -7,9 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import ru.hse.dormitoryproject.Utils.PostObject
 import com.squareup.picasso.Picasso
-import ru.hse.dormitoryproject.PostObject
+import ru.hse.dormitoryproject.Utils.PostObject
 import ru.hse.dormitoryproject.R
 import java.lang.IllegalArgumentException
 

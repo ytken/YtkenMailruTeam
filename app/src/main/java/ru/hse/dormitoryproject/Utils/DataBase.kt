@@ -1,22 +1,15 @@
 package ru.hse.dormitoryproject.Utils
 
 import android.content.Context
-import android.os.Build
 import android.net.Uri
 import android.util.Log
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import com.google.firebase.auth.ktx.auth
-import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.UploadTask
-import ru.hse.dormitoryproject.PostObject
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.math.log
 
 
 class DataBase() {
@@ -37,7 +30,6 @@ class DataBase() {
         private const val PHOTO_STORAGE = "images/"
 
 
-        @RequiresApi(Build.VERSION_CODES.N)
         fun createCurrentUser(context: Context?) {
 
             if (user != null) {
@@ -71,7 +63,7 @@ class DataBase() {
         }
 
 
-        fun writePost(context: Context?, postObject: PostObject) {
+        private fun writePost(context: Context?, postObject: PostObject) {
             if (user != null) {
 
 
@@ -121,12 +113,12 @@ class DataBase() {
                     if (task.isSuccessful) {
                         //return task.result.toString()
                         postObject.storageRef = task.result.toString()
-                        writeToBase(context, postObject, nameCollection)
+                        writePost(context, postObject)
                     }
                 }
             }
             else{
-                writeToBase(context, postObject, nameCollection)
+                writePost(context, postObject)
             }
         }
 

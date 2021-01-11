@@ -47,7 +47,7 @@ class FeedFragment : Fragment() {
 
         val updateNewsFeed = {
             val sth = { postAdapter.notifyDataSetChanged();  refresh.isRefreshing = false}
-            DataBase.readAllData(posts, sth)
+            DataBase.readAllPost(posts, sth)
         }
 
         updateNewsFeed.invoke()

@@ -1,4 +1,4 @@
-package ru.hse.dormitoryproject
+package ru.hse.dormitoryproject.Utils
 
 import com.google.firebase.firestore.Exclude
 import com.google.firebase.firestore.IgnoreExtraProperties

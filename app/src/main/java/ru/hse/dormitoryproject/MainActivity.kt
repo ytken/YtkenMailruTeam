@@ -1,8 +1,11 @@
 package ru.hse.dormitoryproject
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.findNavController
@@ -138,6 +141,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             signInGoogle()
         }
     }
+
+
+   private fun signInGoogle(){
+       val signInIntent = googleSignInClient.signInIntent
+       startActivityForResult(signInIntent, RC_SIGN_IN)
+    }
+
 
 
 

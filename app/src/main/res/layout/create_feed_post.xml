@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="300dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:minWidth="300dp"
     android:orientation="vertical">
 
@@ -37,14 +37,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="Выберите изображение(нажмите):"/>
+        android:text="Выберите изображение(нажмите):" />
 
     <ImageView
         android:id="@+id/choose_pic_img"
         android:layout_width="match_parent"
         android:layout_height="130dp"
         android:layout_margin="10dp"
-        android:src="@drawable/your_advertisement"/>
+        android:src="@drawable/your_advertisement" />
 
     <Button
         android:id="@+id/button_push"
