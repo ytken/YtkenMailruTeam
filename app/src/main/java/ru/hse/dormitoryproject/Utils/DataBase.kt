@@ -104,7 +104,7 @@ class DataBase() {
             }
         }
 
-        public fun uploadImage(
+        fun uploadImage(
             path: Uri?,
             context: Context?,
             postObject: PostObject,
@@ -201,6 +201,52 @@ class DataBase() {
                     }
 
 
+            }
+        }
+
+        fun writeTask(context: Context?, taskObject: TaskObject, successListener: () -> Unit) {
+            if (user != null) {
+                taskObject.author = user.uid
+
+                // Получаем профиль пользователя
+                val userDocument = db.collection(COLLECTION_USERS).document(user.uid)
+
+                userDocument.get().addOnSuccessListener {
+                    val coins = it.get("countCoins") as Int
+
+                    if (coins >= taskObject.reward) {
+                        // Add a new document with a generated ID
+                        db.collection(COLLECTION_TASKS).add(taskObject.toMap())
+                            .addOnSuccessListener { task ->
+
+                                userDocument.get().addOnSuccessListener {
+                                    // Получаем лист опубликованых задач
+                                    val taskIds: ArrayList<String> =
+                                        it.get("workIds") as ArrayList<String>
+                                    // Добовляем id новой задачи
+                                    taskIds.add(task.id)
+                                    // Обновляем профиль пользователя
+                                    userDocument.update("workIds", taskIds)
+                                    userDocument.update("countCoins", coins - taskObject.reward)
+                                }
+
+                                Toast.makeText(
+                                    context,
+                                    TOAST_CREATE_TASK_SUCCESS,
+                                    Toast.LENGTH_SHORT
+                                )
+                                    .show()
+
+                            }.addOnFailureListener {
+                                Toast.makeText(context, TOAST_CREATE_TASK_FAIL, Toast.LENGTH_SHORT)
+                                    .show()
+                            }
+
+                        Toast.makeText(context, TOAST_MONEY_SUCCESS, Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(context, TOAST_MONEY_FAIL, Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
 
