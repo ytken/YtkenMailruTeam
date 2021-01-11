@@ -1,5 +1,6 @@
 package ru.hse.dormitoryproject
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import ru.hse.dormitoryproject.Utils.PostObject
 import ru.hse.dormitoryproject.favourites.FavPostAdapter
 
 // TODO: Rename parameter arguments, choose names that match
@@ -16,7 +18,7 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [FavouritesFragment.newInstance] factory method to
+ * Use the [favouritesFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
 class FavouritesFragment : Fragment() {
@@ -66,7 +68,8 @@ class FavouritesFragment : Fragment() {
                 "",
                 "описание...",
                 "01.01.0001",
-                true
+                true,
+                "sdf"
             )
         )
         post.add(
@@ -75,7 +78,8 @@ class FavouritesFragment : Fragment() {
                 "",
                 "описание...",
                 "01.01.0001",
-                true
+                true,
+                "sdf"
             )
         )
         post.add(
@@ -84,7 +88,8 @@ class FavouritesFragment : Fragment() {
                 "",
                 "описание...",
                 "01.01.0001",
-                true
+                true,
+                "sdf"
             )
         )
 

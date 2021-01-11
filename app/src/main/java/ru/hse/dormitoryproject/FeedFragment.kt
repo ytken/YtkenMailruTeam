@@ -7,12 +7,14 @@ import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import ru.hse.dormitoryproject.Utils.DataBase
 import ru.hse.dormitoryproject.newsFeed.FragmentCreatePost
 import ru.hse.dormitoryproject.newsFeed.FragmentWholePost
+import ru.hse.dormitoryproject.Utils.PostObject
 import ru.hse.dormitoryproject.newsFeed.PostAdapter
 
 // TODO: Rename parameter arguments, choose names that match
@@ -45,7 +47,7 @@ class FeedFragment : Fragment() {
 
         val updateNewsFeed = {
             val sth = { postAdapter.notifyDataSetChanged();  refresh.isRefreshing = false}
-            DataBase.readAllData("PageWork", posts, sth)
+            DataBase.readAllPost(posts, sth)
         }
 
         updateNewsFeed.invoke()
@@ -58,13 +60,7 @@ class FeedFragment : Fragment() {
 
         val btn = view.findViewById<ImageButton>(R.id.feed_btn_new_post)
         btn.setOnClickListener {
-
-            val fragmentManager = activity?.supportFragmentManager
-            val fragmentCreatePost: FragmentCreatePost = FragmentCreatePost(updateNewsFeed)
-            if (fragmentManager != null) {
-                fragmentCreatePost.show(fragmentManager,"CREATE_POST")
-            }
-
+            findNavController().navigate(R.id.createPostFragment)
         }
 
         refresh.setOnRefreshListener {

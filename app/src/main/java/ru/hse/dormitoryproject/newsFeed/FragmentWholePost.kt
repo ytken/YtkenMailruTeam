@@ -13,8 +13,8 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import com.squareup.picasso.Picasso
-import ru.hse.dormitoryproject.PostObject
 import ru.hse.dormitoryproject.R
+import ru.hse.dormitoryproject.Utils.PostObject
 import java.lang.IllegalArgumentException
 
 class FragmentWholePost(private val currentPost : PostObject, private val notifier : ()->Unit) : DialogFragment() {

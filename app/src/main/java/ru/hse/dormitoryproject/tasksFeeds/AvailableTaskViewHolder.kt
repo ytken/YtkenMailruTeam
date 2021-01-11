@@ -5,7 +5,6 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import ru.hse.dormitoryproject.PostObject
 import ru.hse.dormitoryproject.R
 
 class AvailableTaskViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {

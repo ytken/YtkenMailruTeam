@@ -1,29 +1,26 @@
 package ru.hse.dormitoryproject.newsFeed
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.provider.MediaStore
 import android.view.*
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.fragment.app.DialogFragment
-import ru.hse.dormitoryproject.PostObject
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import ru.hse.dormitoryproject.Utils.PostObject
 import ru.hse.dormitoryproject.R
 import ru.hse.dormitoryproject.Utils.DataBase
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class FragmentCreatePost(private val updateNewsFeed:()->Unit) : DialogFragment() {
+class FragmentCreatePost(): Fragment()  {
     private val PICK_IMAGE = 0
     private var uri : Uri? = null
 
@@ -48,21 +45,22 @@ class FragmentCreatePost(private val updateNewsFeed:()->Unit) : DialogFragment()
             val currentDate = sdf.format(Date())
             val author = "Alex"
 
+
             if (tittleText.isEmpty()) {
-                Toast.makeText(context, TOAST_NULL_TITTLE, Toast.LENGTH_SHORT).show()
+                Toast.makeText(it.context , TOAST_NULL_TITTLE, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             if (contentText.isEmpty()) {
-                Toast.makeText(context, TOAST_NULL_CONTENT, Toast.LENGTH_SHORT).show()
+                Toast.makeText(it.context, TOAST_NULL_CONTENT, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             val post = PostObject(tittleText, "descriptor", contentText, currentDate, false, author)
-            DataBase.uploadImage(uri ,context, post, NAME_COLLECTION)
-            this.dismiss()
-            updateNewsFeed.invoke()
+            DataBase.uploadImage(uri ,it.context, post, NAME_COLLECTION)
+            findNavController().navigate(R.id.feedFragment)
         }
+
 
         view.findViewById<ImageView>(R.id.choose_pic_img).setOnClickListener { getImage(view.context) }
 
@@ -80,9 +78,10 @@ class FragmentCreatePost(private val updateNewsFeed:()->Unit) : DialogFragment()
         private const val TOAST_NULL_CONTENT = "Please enter the content before clicking the button"
     }
 
+
     private fun getImage(context : Context){
         val pickPhoto = Intent(Intent.ACTION_PICK,
-            android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+            MediaStore.Images.Media.INTERNAL_CONTENT_URI)
         startActivityForResult(pickPhoto, PICK_IMAGE)
     }
 

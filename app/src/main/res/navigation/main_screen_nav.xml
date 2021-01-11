@@ -24,4 +24,16 @@
         android:name="ru.hse.dormitoryproject.profileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+
+
+
+    <fragment
+        android:id="@+id/createPostFragment"
+        android:name="ru.hse.dormitoryproject.newsFeed.FragmentCreatePost"
+        android:label="create_feed_post"
+        tools:layout="@layout/create_feed_post"
+        />
+
+
+
 </navigation>

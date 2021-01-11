@@ -11,7 +11,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import ru.hse.dormitoryproject.PostObject
 import ru.hse.dormitoryproject.R
 import ru.hse.dormitoryproject.newsFeed.FragmentWholePost
 

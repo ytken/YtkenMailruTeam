@@ -4,9 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import ru.hse.dormitoryproject.PostObject
 import ru.hse.dormitoryproject.R
-import ru.hse.dormitoryproject.newsFeed.PostViewHolder
 
 class AvailableTaskAdapter(private val data: ArrayList<TaskObject>, private val fManager : FragmentManager?,
                            private val display : (TaskObject, FragmentManager?, ()->Unit)->Unit) :

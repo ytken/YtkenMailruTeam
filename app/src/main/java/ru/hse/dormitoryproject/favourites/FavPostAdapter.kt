@@ -1,11 +1,10 @@
 package ru.hse.dormitoryproject.favourites
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import ru.hse.dormitoryproject.PostObject
+import ru.hse.dormitoryproject.Utils.PostObject
 import ru.hse.dormitoryproject.R
 
 class FavPostAdapter(private var data: ArrayList<PostObject>, private val fManager : FragmentManager?,
