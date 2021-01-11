@@ -96,30 +96,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             bottomNavigationView.setupWithNavController(navController)
 
 
-            val toolbar = findViewById<Toolbar>(R.id.toolbar)
-            toolbar.title = resources.getString(R.string.app_name)
-            toolbar.isClickable = true
-
-            toolbar.setOnMenuItemClickListener {
-                when (it.itemId) {
-                    R.id.go_to_search -> {
-                        val intent = Intent(this@MainActivity, SearchActivity::class.java)
-                        startActivity(intent)
-
-                    }
-                    R.id.action_cancel -> {
-                        val prevFragment =
-                            supportFragmentManager.findFragmentByTag(resources.getString(R.string.tag_search_fragment))
-                        if (prevFragment != null)
-                            supportFragmentManager.beginTransaction().remove(prevFragment).commit()
-                    }
-                    else -> Toast.makeText(this@MainActivity, "No activity!", Toast.LENGTH_SHORT)
-                        .show()
-                }
-                true
-
-
-            }
 
 
 

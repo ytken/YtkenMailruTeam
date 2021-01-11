@@ -4,7 +4,10 @@ import android.content.Context
 import android.net.Uri
 import android.util.Log
 import android.widget.Toast
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -46,10 +49,13 @@ class DataBase() {
                         if (userContains != null && !userContains) {
 
                             val userObject = UserObject(
-                                user.displayName,
+                                user.displayName?.substringBeforeLast(" "),
+                                user.displayName?.substringAfterLast(" "),
                                 user.email,
                                 user.phoneNumber,
                                 user.photoUrl.toString(),
+                                "",
+                                1000,
                                 arrayListOf(),
                                 arrayListOf(),
                                 arrayListOf()
@@ -62,6 +68,13 @@ class DataBase() {
             }
         }
 
+
+         fun getCurrentUser(): DocumentReference? {
+            if(user!=null) {
+                return db.collection(COLLECTION_USERS).document(user.uid)
+            }
+            return null
+        }
 
         private fun writePost(context: Context?, postObject: PostObject) {
             if (user != null) {
