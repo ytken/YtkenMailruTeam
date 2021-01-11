@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        supportActionBar?.hide()
         setTheme(R.style.Theme_DormitoryProject_Beta)
 
         super.onCreate(savedInstanceState)
@@ -78,7 +79,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         //Пользователь был ранее авторизован
         if (currentUser != null) {
-
+            supportActionBar?.show()
             setContentView(R.layout.activity_main)
 
             val bottomNavigationView =
