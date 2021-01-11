@@ -86,83 +86,25 @@ class DataBase() {
         private fun writePost(context: Context?, postObject: PostObject) {
             if (user != null) {
 
-                postObject.author = user.uid
-
-                // Add a new document with a generated ID
-                db.collection(COLLECTION_FEEDS).add(postObject.toMap())
-                    .addOnSuccessListener { post ->
-
-
-                        // Получаем профиль пользователя
-                        val userDocument = db.collection(COLLECTION_USERS).document(user.uid)
-
-
-                        userDocument.get().addOnSuccessListener {
-                            // Получаем лист опубликованых постов
-                            val postIds: ArrayList<String> = it.get("postIds") as ArrayList<String>
-                            // Добовляем id нового поста
-                            postIds.add(post.id)
-                            // Обновляем профиль пользователя
-                            userDocument.update("postIds", postIds)
-                        }
-
-                        Toast.makeText(context, TOAST_CREATE_POST_SUCCESS, Toast.LENGTH_SHORT)
-                            .show()
-                    }
-
-                    .addOnFailureListener {
-                        Toast.makeText(context, TOAST_CREATE_POST_FAIL, Toast.LENGTH_SHORT).show()
-                    }
-            }
-        }
-
-        fun writeTask(context: Context?, taskObject: TaskObject, successListener: () -> Unit) {
-            if (user != null) {
-                taskObject.author = user.uid
+                // Add a new document with ID
+                db.collection(COLLECTION_FEEDS).document(postObject.postID!!).set(postObject)
 
                 // Получаем профиль пользователя
-                val userDocument = db.collection(COLLECTION_USERS).document(user.uid)
+                val userDocument = getCurrentUser()!!
 
                 userDocument.get().addOnSuccessListener {
-                    val coins = it.get("countCoins") as Int
-
-                    if (coins >= taskObject.reward) {
-                        // Add a new document with a generated ID
-                        db.collection(COLLECTION_TASKS).add(taskObject.toMap())
-                            .addOnSuccessListener { task ->
-
-                                userDocument.get().addOnSuccessListener {
-                                    // Получаем лист опубликованых задач
-                                    val taskIds: ArrayList<String> =
-                                        it.get("workIds") as ArrayList<String>
-                                    // Добовляем id новой задачи
-                                    taskIds.add(task.id)
-                                    // Обновляем профиль пользователя
-                                    userDocument.update("workIds", taskIds)
-                                    userDocument.update("countCoins", coins - taskObject.reward)
-                                }
-
-                                Toast.makeText(
-                                    context,
-                                    TOAST_CREATE_TASK_SUCCESS,
-                                    Toast.LENGTH_SHORT
-                                )
-                                    .show()
-
-                            }.addOnFailureListener {
-                                Toast.makeText(context, TOAST_CREATE_TASK_FAIL, Toast.LENGTH_SHORT)
-                                    .show()
-                            }
-
-                        Toast.makeText(context, TOAST_MONEY_SUCCESS, Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(context, TOAST_MONEY_FAIL, Toast.LENGTH_SHORT).show()
-                    }
+                    // Получаем лист опубликованых постов
+                    val postIds: ArrayList<String> = it.get("postIds") as ArrayList<String>
+                    // Добовляем id нового поста
+                    postIds.add(postObject.postID!!)
+                    // Обновляем профиль пользователя
+                    userDocument.update("postIds", postIds)
                 }
+
             }
         }
 
-        fun uploadImage(
+        public fun uploadImage(
             path: Uri?,
             context: Context?,
             postObject: PostObject,
@@ -197,21 +139,69 @@ class DataBase() {
             dataChangedListener: () -> Unit
         ) {
 
-            // Getting all data from data-base and push this info within Adapter
-            db.collection(COLLECTION_FEEDS).get()
-                .addOnSuccessListener { result ->
 
-                    val taskList = result.toObjects(PostObject::class.java)
+            val favList = getCurrentUser()!!.get().addOnSuccessListener {
+                val favList = it.get("favoriteIds") as ArrayList<String>
 
-                    list.clear()
-                    list.addAll(taskList)
-                    dataChangedListener()
 
-                    Log.d("READ_BASE", "Success Getting documents.")
-                }
-                .addOnFailureListener { exception ->
-                    Log.w("READ_BASE", "Error getting documents.", exception)
-                }
+                db.collection(COLLECTION_FEEDS).get()
+                    .addOnSuccessListener { result ->
+
+                        val taskList = result.toObjects(PostObject::class.java)
+                        for (obj in taskList) {
+                            if (favList.contains(obj.postID))
+                                obj.isFavorite = true
+                        }
+
+
+                        list.clear()
+                        list.addAll(taskList)
+                        dataChangedListener()
+
+                        Log.d("READ_BASE", "Success Getting documents.")
+                    }
+                    .addOnFailureListener { exception ->
+                        Log.w("READ_BASE", "Error getting documents.", exception)
+                    }
+
+            }
+            //Getting all data from data-base and push this info within Adapter
+
+        }
+
+
+        fun readAllFavorites(
+            list: ArrayList<PostObject>,
+            dataChangedListener: () -> Unit
+        ) {
+
+
+            val favList = getCurrentUser()!!.get().addOnSuccessListener {
+                val favList = it.get("favoriteIds") as ArrayList<String>
+
+
+                db.collection(COLLECTION_FEEDS).get()
+                    .addOnSuccessListener { result ->
+
+                        val taskList = result.toObjects(PostObject::class.java)
+                        for (obj in taskList) {
+                            if (favList.contains(obj.postID))
+                                obj.isFavorite = true
+                        }
+
+
+                        list.clear()
+                        list.addAll(taskList.filter { x->x.isFavorite==true })
+                        dataChangedListener()
+
+                        Log.d("READ_BASE", "Success Getting documents.")
+                    }
+                    .addOnFailureListener { exception ->
+                        Log.w("READ_BASE", "Error getting documents.", exception)
+                    }
+
+
+            }
         }
 
         fun readAllTasks(

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import ru.hse.dormitoryproject.Utils.DataBase
 import ru.hse.dormitoryproject.Utils.PostObject
 import ru.hse.dormitoryproject.favourites.FavPostAdapter
 
@@ -41,7 +42,7 @@ class FavouritesFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_favourites, container, false)
 
-        var data = getFavPosts()
+        var data = arrayListOf<PostObject>()
         val postAdapter = FavPostAdapter(data, activity?.supportFragmentManager) { a, b, c ->
             FeedFragment.showPost(
                 a,
@@ -49,6 +50,14 @@ class FavouritesFragment : Fragment() {
                 c
             )
         }
+
+        val updateFavorites = {
+            val sth = { postAdapter.notifyDataSetChanged()}
+            DataBase.readAllFavorites(data,sth)
+        }
+
+        updateFavorites.invoke()
+
 
         view?.findViewById<RecyclerView>(R.id.feed_recycler)?.apply {
             layoutManager = LinearLayoutManager(view.context)
@@ -58,43 +67,6 @@ class FavouritesFragment : Fragment() {
         return view
     }
 
-    private fun getFavPosts() : ArrayList<PostObject>{
-        var post = arrayListOf<PostObject>()
-        // Из shared Pref получаем id избранных постов
-        // Получение записей с сервера по сохраненным id / ИЛИ получаем все записи с сервера и отбираем те, чьи id были сохранены.
-        post.add(
-            PostObject(
-                "Тестовый пост #1",
-                "",
-                "описание...",
-                "01.01.0001",
-                true,
-                "sdf"
-            )
-        )
-        post.add(
-            PostObject(
-                "Тестовый пост #2",
-                "",
-                "описание...",
-                "01.01.0001",
-                true,
-                "sdf"
-            )
-        )
-        post.add(
-            PostObject(
-                "Тестовый пост #3",
-                "",
-                "описание...",
-                "01.01.0001",
-                true,
-                "sdf"
-            )
-        )
-
-        return post
-    }
 
     // TODO: Add 'onSave(+Restore)InstanceState' to save instance after screen rotation. But before this we need local DB.
 
