@@ -8,7 +8,20 @@
         android:id="@+id/feedFragment"
         android:name="ru.hse.dormitoryproject.FeedFragment"
         android:label="fragment_feed"
-        tools:layout="@layout/fragment_feed" />
+        tools:layout="@layout/fragment_feed" >
+        <action
+            android:id="@+id/action_feedFragment_to_tasksFragment"
+            app:destination="@id/tasksFragment" />
+        <action
+            android:id="@+id/action_feedFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_feedFragment_to_favouritesFragment"
+            app:destination="@id/favouritesFragment" />
+        <action
+            android:id="@+id/action_feedFragment_to_createPostFragment"
+            app:destination="@id/createPostFragment" />
+    </fragment>
     <fragment
         android:id="@+id/tasksFragment"
         android:name="ru.hse.dormitoryproject.TasksFragment"
@@ -23,7 +36,11 @@
         android:id="@+id/profileFragment"
         android:name="ru.hse.dormitoryproject.profileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_EditProfileFragment"
+            app:destination="@id/EditProfileFragment" />
+    </fragment>
 
 
 
@@ -31,8 +48,14 @@
         android:id="@+id/createPostFragment"
         android:name="ru.hse.dormitoryproject.newsFeed.FragmentCreatePost"
         android:label="create_feed_post"
-        tools:layout="@layout/create_feed_post"
-        />
+        tools:layout="@layout/create_feed_post" />
+
+
+    <fragment
+        android:id="@+id/EditProfileFragment"
+        android:name="ru.hse.dormitoryproject.FragmentEditProfile"
+        android:label="edit_profile"
+        tools:layout="@layout/profile_edit" />
 
 
 

@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import ru.hse.dormitoryproject.R
+import ru.hse.dormitoryproject.Utils.DataBase
 
 class FragmentAvailableWholeTask(
     private val currentTask: TaskObject,
@@ -29,7 +30,7 @@ class FragmentAvailableWholeTask(
         view?.findViewById<TextView>(R.id.feed_task_available_deadline)?.text = currentTask.deadline
 
         view?.findViewById<Button>(R.id.feed_task_take_btn)?.setOnClickListener {
-            // Удалить пост из списка постов/изменить значение в базе
+            DataBase.takeTaskByUser(currentTask)
             notifier()
             this.dismiss()
         }

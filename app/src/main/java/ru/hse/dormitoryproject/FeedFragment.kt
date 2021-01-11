@@ -92,6 +92,8 @@ class FeedFragment : Fragment() {
         // Получение записей с сервера
         post.add(
             PostObject(
+                "",
+
                 "Тестовый пост #1",
                 "",
                 "описание...",
@@ -101,6 +103,8 @@ class FeedFragment : Fragment() {
         )
         post.add(
             PostObject(
+                "",
+
                 "Тестовый пост #2",
                 "",
                 "описание...",
@@ -110,6 +114,8 @@ class FeedFragment : Fragment() {
         )
         post.add(
             PostObject(
+                "",
+
                 "Тестовый пост #3",
                 "",
                 "описание...",

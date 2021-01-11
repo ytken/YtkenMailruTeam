@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import ru.hse.dormitoryproject.Utils.PostObject
 import ru.hse.dormitoryproject.R
+import ru.hse.dormitoryproject.Utils.DataBase
 import java.lang.IllegalArgumentException
 
 class FavPostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -31,13 +32,29 @@ class FavPostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         btn.setOnClickListener {
             if (newObject.isFavorite!!) {
                 btn.setBackgroundResource(R.drawable.ic_baseline_star_not_chosen);
+                val userDoc = DataBase.getCurrentUser()!!
+                userDoc.get().addOnSuccessListener { it ->
+                    val favoritesIds: ArrayList<String> = it.get("favoriteIds") as ArrayList<String>
+                    favoritesIds.remove(newObject.postID!!)
+                    userDoc.update("favoriteIds", favoritesIds)
+                }
+
                 newObject.isFavorite = false;
             } else {
                 btn.setBackgroundResource(R.drawable.ic_baseline_star_chosen);
+                val userDoc = DataBase.getCurrentUser()!!
+                userDoc.get().addOnSuccessListener { it ->
+                    val favoritesIds: ArrayList<String> = it.get("favoriteIds") as ArrayList<String>
+                    favoritesIds.add(newObject.postID!!)
+                    userDoc.update("favoriteIds", favoritesIds)
+                }
+
                 newObject.isFavorite = true;
             }
             changer(newObject)
         }
+
+
 
         val picture = itemView.findViewById<ImageView>(R.id.post_pic)
         try {

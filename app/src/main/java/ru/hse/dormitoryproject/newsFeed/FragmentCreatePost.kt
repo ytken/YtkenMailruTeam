@@ -56,7 +56,9 @@ class FragmentCreatePost(): Fragment()  {
                 return@setOnClickListener
             }
 
-            val post = PostObject(tittleText, "descriptor", contentText, currentDate, false, author)
+            val id = UUID.randomUUID().toString()
+
+            val post = PostObject(id,tittleText, "descriptor", contentText, currentDate, false, author)
             DataBase.uploadImage(uri ,it.context, post, NAME_COLLECTION)
             findNavController().navigate(R.id.feedFragment)
         }

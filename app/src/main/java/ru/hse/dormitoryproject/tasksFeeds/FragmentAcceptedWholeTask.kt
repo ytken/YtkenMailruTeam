@@ -13,7 +13,7 @@ import ru.hse.dormitoryproject.R
 
 class FragmentAcceptedWholeTask(
     private val currentTask: TaskObject,
-    private val notifier: () -> Unit
+    private val notifier: (Boolean) -> Unit
 ) : DialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,24 +37,23 @@ class FragmentAcceptedWholeTask(
             if(currentTask.getStatus() == TaskObject.Status.READY){
                 state?.text = "Готово"
                 state?.setTextColor(Color.parseColor("#00C724"));
-            }
-            else if(currentTask.getStatus() == TaskObject.Status.IN_PROGRESS){
-                state?.text = "Выполняется"
-                state?.setTextColor(Color.parseColor("#C70003"));
 
                 view?.findViewById<LinearLayout>(R.id.layout_action_bar)?.visibility = View.VISIBLE
 
                 view?.findViewById<Button>(R.id.send_report_btn)?.setOnClickListener {
                     // Кинуть репорт на исполнителя
-                    notifier() // Удалить пост из списка постов/изменить значение в базе
+                    notifier(true) // Удалить пост из списка постов/изменить значение в базе
                     this.dismiss()
                 }
 
                 view?.findViewById<Button>(R.id.send_reward_btn)?.setOnClickListener {
-                    // Перечислить награду исполнителю
-                    notifier() // Удалить пост из списка постов/изменить значение в базе
+                    notifier(false) // Удалить пост из списка постов/изменить значение в базе
                     this.dismiss()
                 }
+            }
+            else if(currentTask.getStatus() == TaskObject.Status.IN_PROGRESS){
+                state?.text = "Выполняется"
+                state?.setTextColor(Color.parseColor("#C70003"));
             }
         }
 

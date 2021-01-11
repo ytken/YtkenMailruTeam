@@ -6,17 +6,20 @@ import com.google.firebase.storage.StorageReference
 
 @IgnoreExtraProperties
 data class PostObject(
+    var postID:String?="",
     val title: String? = "",
     val descriptor: String? = "",
     val content: String? = "",
     val dateOfPublish: String? = "",
     var isFavorite: Boolean? = false,
-    val author: String? = "",
+    var author: String? = "",
     var storageRef : String? = ""
+
 ) {
     @Exclude
     fun toMap(): Map<String, Any?> {
         return mapOf(
+            "postID" to postID,
             "title" to title,
             "descriptor" to descriptor,
             "content" to content,

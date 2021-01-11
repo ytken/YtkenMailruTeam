@@ -7,26 +7,34 @@ import com.google.firebase.firestore.IgnoreExtraProperties
 
 @IgnoreExtraProperties
 data class UserObject(
-    val fullName: String?,
-    val email: String?,
-    val phoneNumber: String?,
-    val photoProfile: String?,
-    val favoriteIds: ArrayList<String>?,
-    val postIds: ArrayList<String>?,
-    val workIds: ArrayList<String>?
+    val name: String? = "",
+    val surname: String? = "",
+    val email: String? = "",
+    val phoneNumber: String? = "",
+    val photoProfile: String? = "",
+    val vk: String? = "",
+    val countCoins: Int? = 0,
+    val favoriteIds: ArrayList<String>? = arrayListOf(),
+    val postIds: ArrayList<String>? = arrayListOf(),
+    val workIds: ArrayList<String>? = arrayListOf(),
+    var rating : Int = 1
 
 
 ) {
     @Exclude
     fun toMap(): Map<String, Any?> {
         return mapOf(
-            "full_name" to fullName,
+            "name" to name,
+            "surname" to surname,
+            "vk" to vk,
             "email" to email,
-            "phone_number" to phoneNumber,
-            "photo_profile" to photoProfile,
+            "phoneNumber" to phoneNumber,
+            "photoProfile" to photoProfile,
+            "countCoins" to countCoins,
             "favoriteIds" to favoriteIds,
             "postIds" to postIds,
-        "workIds" to workIds
+            "workIds" to workIds,
+            "rating" to rating
         )
     }
 }

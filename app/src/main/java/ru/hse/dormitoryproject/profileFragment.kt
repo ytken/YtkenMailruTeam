@@ -1,14 +1,18 @@
 package ru.hse.dormitoryproject
 
+import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.squareup.picasso.Picasso
+import ru.hse.dormitoryproject.Utils.DataBase
+import ru.hse.dormitoryproject.Utils.UserObject
 import ru.hse.dormitoryproject.friend_data.FriendItem
-import ru.hse.dormitoryproject.friend_data.FriendRepository
 
 class profileFragment : Fragment() {
 
@@ -24,6 +28,7 @@ class profileFragment : Fragment() {
     lateinit var textRate: TextView
     lateinit var textVK: TextView
     lateinit var imageProf: ImageView
+    lateinit var btnEdit:Button
 
     lateinit var buttonFriends: Button
 
@@ -45,14 +50,27 @@ class profileFragment : Fragment() {
         textRate = v.findViewById(R.id.textViewRate)
         textVK = v.findViewById(R.id.textViewVKLink)
         imageProf = v.findViewById(R.id.imageViewProfile)
+        btnEdit = v.findViewById(R.id.btn_edit)
 
-        textName.text = name
-        textSurname.text = surname
-        textCurr.text = currencyNumber.toString()
-        textVK.text = linkVK
-        textRate.text = rateNumber.toString()
-        //imageProf.setImageResource(R.drawable.nusha) // Этого ресурса нет, я не знаю, где его взять, пока что заменио на это:
-        imageProf.setImageResource(R.drawable.your_advertisement)
+        DataBase.getCurrentUser()?.get()?.addOnSuccessListener {it->
+           val user = it.toObject(UserObject::class.java)
+            textName.text = user?.name
+            textSurname.text = user?.surname
+            textCurr.text = user?.countCoins.toString()
+            textVK.text = user?.vk.toString()
+            textRate.text = "1"
+            val uri:Uri? = user?.photoProfile?.toUri()
+            Picasso.get().load(uri).into(imageProf)
+        }
+
+        btnEdit.setOnClickListener {
+            val bundle:Bundle = Bundle()
+            bundle.putCharSequence("name",textName.text)
+            bundle.putCharSequence("surname",textSurname.text)
+            bundle.putCharSequence("vk",textVK.text)
+
+            findNavController().navigate(R.id.EditProfileFragment,bundle)
+        }
 
         /*buttonFriends = v.findViewById(R.id.button_login_friends)
         buttonFriends.setOnClickListener{
