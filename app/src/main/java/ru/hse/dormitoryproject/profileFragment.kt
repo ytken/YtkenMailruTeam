@@ -13,7 +13,6 @@ import com.squareup.picasso.Picasso
 import ru.hse.dormitoryproject.Utils.DataBase
 import ru.hse.dormitoryproject.Utils.UserObject
 import ru.hse.dormitoryproject.friend_data.FriendItem
-import java.nio.BufferUnderflowException
 
 class profileFragment : Fragment() {
 

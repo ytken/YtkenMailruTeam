@@ -20,6 +20,7 @@ class DataBase() {
     companion object {
         // Link to dataBase
         private val db = Firebase.firestore
+
         // Current user
         private val user = Firebase.auth.currentUser
 
@@ -69,8 +70,8 @@ class DataBase() {
         }
 
 
-         fun getCurrentUser(): DocumentReference? {
-            if(user!=null) {
+        fun getCurrentUser(): DocumentReference? {
+            if (user != null) {
                 return db.collection(COLLECTION_USERS).document(user.uid)
             }
             return null
@@ -79,38 +80,31 @@ class DataBase() {
         private fun writePost(context: Context?, postObject: PostObject) {
             if (user != null) {
 
+                // Add a new document with ID
+                db.collection(COLLECTION_FEEDS).document(postObject.postID!!).set(postObject)
 
-                // Add a new document with a generated ID
-                db.collection(COLLECTION_FEEDS).add(postObject.toMap())
-                    .addOnSuccessListener { post ->
+                // Получаем профиль пользователя
+                val userDocument = getCurrentUser()!!
 
+                userDocument.get().addOnSuccessListener {
+                    // Получаем лист опубликованых постов
+                    val postIds: ArrayList<String> = it.get("postIds") as ArrayList<String>
+                    // Добовляем id нового поста
+                    postIds.add(postObject.postID!!)
+                    // Обновляем профиль пользователя
+                    userDocument.update("postIds", postIds)
+                }
 
-                        // Получаем профиль пользователя
-                        val userDocument = db.collection(COLLECTION_USERS).document(user.uid)
-
-
-                        userDocument.get().addOnSuccessListener {
-                            // Получаем лист опубликованых постов
-                            val postIds: ArrayList<String> = it.get("postIds") as ArrayList<String>
-                            // Добовляем id нового поста
-                            postIds.add(post.id)
-                            // Обновляем профиль пользователя
-                            userDocument.update("postIds", postIds)
-                        }
-
-
-                        Toast.makeText(context, TOAST_CREATE_POST_SUCCESS, Toast.LENGTH_SHORT)
-                            .show()
-                    }
-
-                    .addOnFailureListener {
-                        Toast.makeText(context, TOAST_CREATE_POST_FAIL, Toast.LENGTH_SHORT).show()
-                    }
             }
         }
 
-        public fun uploadImage(path : Uri?, context: Context?, postObject: PostObject, nameCollection: String) {
-            if(path!=null) {
+        public fun uploadImage(
+            path: Uri?,
+            context: Context?,
+            postObject: PostObject,
+            nameCollection: String
+        ) {
+            if (path != null) {
                 val name = UUID.randomUUID().toString()
                 val ref = storageRef.child(PHOTO_STORAGE + name)
 
@@ -129,8 +123,7 @@ class DataBase() {
                         writePost(context, postObject)
                     }
                 }
-            }
-            else{
+            } else {
                 writePost(context, postObject)
             }
         }
@@ -140,21 +133,73 @@ class DataBase() {
             dataChangedListener: () -> Unit
         ) {
 
-            // Getting all data from data-base and push this info within Adapter
-            db.collection(COLLECTION_FEEDS).get()
-                .addOnSuccessListener { result ->
 
-                    val taskList = result.toObjects(PostObject::class.java)
+            val favList = getCurrentUser()!!.get().addOnSuccessListener {
+                val favList = it.get("favoriteIds") as ArrayList<String>
 
-                    list.clear()
-                    list.addAll(taskList)
-                    dataChangedListener()
 
-                    Log.d("READ_BASE", "Success Getting documents.")
-                }
-                .addOnFailureListener { exception ->
-                    Log.w("READ_BASE", "Error getting documents.", exception)
-                }
+                db.collection(COLLECTION_FEEDS).get()
+                    .addOnSuccessListener { result ->
+
+                        val taskList = result.toObjects(PostObject::class.java)
+                        for (obj in taskList) {
+                            if (favList.contains(obj.postID))
+                                obj.isFavorite = true
+                        }
+
+
+                        list.clear()
+                        list.addAll(taskList)
+                        dataChangedListener()
+
+                        Log.d("READ_BASE", "Success Getting documents.")
+                    }
+                    .addOnFailureListener { exception ->
+                        Log.w("READ_BASE", "Error getting documents.", exception)
+                    }
+
+            }
+            //Getting all data from data-base and push this info within Adapter
+
+        }
+
+
+        fun readAllFavorites(
+            list: ArrayList<PostObject>,
+            dataChangedListener: () -> Unit
+        ) {
+
+
+            val favList = getCurrentUser()!!.get().addOnSuccessListener {
+                val favList = it.get("favoriteIds") as ArrayList<String>
+
+
+                db.collection(COLLECTION_FEEDS).get()
+                    .addOnSuccessListener { result ->
+
+                        val taskList = result.toObjects(PostObject::class.java)
+                        for (obj in taskList) {
+                            if (favList.contains(obj.postID))
+                                obj.isFavorite = true
+                        }
+
+
+                        list.clear()
+                        list.addAll(taskList.filter { x->x.isFavorite==true })
+                        dataChangedListener()
+
+                        Log.d("READ_BASE", "Success Getting documents.")
+                    }
+                    .addOnFailureListener { exception ->
+                        Log.w("READ_BASE", "Error getting documents.", exception)
+                    }
+
+
+            }
         }
     }
+
+
 }
+
+
