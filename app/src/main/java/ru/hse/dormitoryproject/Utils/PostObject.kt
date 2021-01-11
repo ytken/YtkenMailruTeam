@@ -11,7 +11,7 @@ data class PostObject(
     val content: String? = "",
     val dateOfPublish: String? = "",
     var isFavorite: Boolean? = false,
-    val author: String? = "",
+    var author: String? = "",
     var storageRef : String? = ""
 ) {
     @Exclude

@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import ru.hse.dormitoryproject.R
+import ru.hse.dormitoryproject.Utils.DataBase
 
 class FragmentYourTasksFeed : Fragment() {
     private var pageNumb = 0;
@@ -40,20 +42,20 @@ class FragmentYourTasksFeed : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        var list = arrayListOf<TaskObject>()
         val view = inflater.inflate(R.layout.fragment_tasks_your, container, false)
+        val adapter = YourTaskAdapter(list, activity?.supportFragmentManager, ::showTask)
+        DataBase.readAllTasksPerformedByUser(list) { adapter.notifyDataSetChanged() }
 
         val refresh = view.findViewById<SwipeRefreshLayout>(R.id.swipeRefresh)
         refresh.setColorScheme(R.color.first_refresh_color, R.color.second_refresh_color, R.color.third_refresh_color, R.color.fourth_refresh_color)
         refresh.setOnRefreshListener {
-            // update feed
+            DataBase.readAllTasksPerformedByUser(list) { adapter.notifyDataSetChanged() }
         }
 
-        // не доделал
-        // Inflate the layout for this fragment
         view?.findViewById<RecyclerView>(R.id.feed_recycler)?.apply {
             layoutManager = LinearLayoutManager(view.context)
-            adapter = YourTaskAdapter(arrayListOf(TaskObject("some text here...", 30, "1","Stan", TaskObject.Status.NOT_SELECTED.ordinal, "1.03.2095","Finish Mail project"), TaskObject("some text here...", 28, "2","Martin", TaskObject.Status.NOT_SELECTED.ordinal, "9.10.2032","Do sth")),
-                activity?.supportFragmentManager, ::showTask)
+            this.adapter = adapter
         }
 
         return view

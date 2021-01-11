@@ -26,9 +26,5 @@ class AcceptedTaskViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView
         }
 
         itemView.findViewById<TextView>(R.id.feed_task_accepted_title).text = newObject.title
-
-//        btn.setOnClickListener {
-//            // show more info
-//        }
     }
 }

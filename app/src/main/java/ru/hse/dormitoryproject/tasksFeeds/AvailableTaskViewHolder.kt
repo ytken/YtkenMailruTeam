@@ -14,9 +14,5 @@ class AvailableTaskViewHolder(itemView : View) : RecyclerView.ViewHolder(itemVie
         itemView.findViewById<TextView>(R.id.feed_task_available_reward_sum).text = newObject.reward.toString()
         itemView.findViewById<TextView>(R.id.feed_task_available_disc_title).text = newObject.title
         itemView.findViewById<TextView>(R.id.feed_task_deadline).text=newObject.deadline
-
-//        btn.setOnClickListener {
-//            // show more info
-//        }
     }
 }

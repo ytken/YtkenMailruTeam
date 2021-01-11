@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import ru.hse.dormitoryproject.R
+import ru.hse.dormitoryproject.Utils.DataBase
 import ru.hse.dormitoryproject.newsFeed.FragmentWholePost
 
 class FragmentAcceptedTasksFeed : Fragment() {
@@ -43,20 +44,22 @@ class FragmentAcceptedTasksFeed : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        var list = arrayListOf<TaskObject>()
         val view = inflater.inflate(R.layout.fragment_tasks_accepted, container, false)
+        val adapter = AcceptedTaskAdapter(list, activity?.supportFragmentManager, ::showTask)
+        DataBase.readAllTasksMadeByUser(list) { adapter.notifyDataSetChanged() }
 
         val refresh = view.findViewById<SwipeRefreshLayout>(R.id.swipeRefresh)
         refresh.setColorScheme(R.color.first_refresh_color, R.color.second_refresh_color, R.color.third_refresh_color, R.color.fourth_refresh_color)
         refresh.setOnRefreshListener {
-            // update feed
+            DataBase.readAllTasksMadeByUser(list) { adapter.notifyDataSetChanged() }
         }
 
         // не доделал
         // Inflate the layout for this fragment
         view?.findViewById<RecyclerView>(R.id.feed_recycler)?.apply {
             layoutManager = LinearLayoutManager(view.context)
-            adapter = AcceptedTaskAdapter(arrayListOf(TaskObject("...", 30, "1","Me", TaskObject.Status.NOT_SELECTED.ordinal, "18.8.2021","Pls help me"), TaskObject("...", 28, "2","Me", TaskObject.Status.NOT_SELECTED.ordinal, "29.6.2021","Make me happy")),
-                activity?.supportFragmentManager, ::showTask)
+            this.adapter = adapter
         }
 
         view?.findViewById<ImageButton>(R.id.feed_btn_new_post)?.setOnClickListener {
@@ -70,7 +73,7 @@ class FragmentAcceptedTasksFeed : Fragment() {
         return view
     }
 
-    private fun showTask(taskObject : TaskObject, fragmentManager  : FragmentManager?, notifier : ()->Unit){
+    private fun showTask(taskObject : TaskObject, fragmentManager  : FragmentManager?, notifier : (Boolean)->Unit){
         val fragmentWholePost = FragmentAcceptedWholeTask(taskObject, notifier)
         if (fragmentManager != null) {
             fragmentWholePost.show(fragmentManager,"SHOW_POST")
