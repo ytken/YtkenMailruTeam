@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="post_height">300dp</dimen>
+    <dimen name="post_margin">20dp</dimen>
+    <dimen name="post_title_text_size">30sp</dimen>
+    <dimen name="post_description_text_size">20sp</dimen>
+    <dimen name="post_description_margin_horizontal">10dp</dimen>
+    <dimen name="post_date_text_size">15sp</dimen>
+    <dimen name="post_fav_btn_margin">10dp</dimen>
+    <dimen name="post_auth_name_text_size">40sp</dimen>
+    <dimen name="post_auth_name_margin">20dp</dimen>
+    <dimen name="frgmnt_feed_add_new_post_btn_width">80dp</dimen>
+    <dimen name="frgmnt_feed_add_new_post_btn_height">80dp</dimen>
+    <dimen name="frgmnt_feed_add_new_post_btn_margin_end">10dp</dimen>
+    <dimen name="frgmnt_feed_add_new_post_margin_bottom">30dp</dimen>
+</resources>
