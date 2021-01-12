@@ -208,6 +208,17 @@ class DataBase() {
             }
         }
 
+        fun getName(taskObject: TaskObject, notifier : (String) -> Unit){
+            if ((taskObject.employee != null) && (taskObject.employee != "")){
+                db.collection(COLLECTION_USERS).document(taskObject.employee).get().addOnSuccessListener{
+                    notifier(it.get("employee") as String)
+                }
+            }
+            else{
+                notifier(" - ")
+            }
+        }
+
         fun writeTask(context: Context?, taskObject: TaskObject, successListener: () -> Unit) {
             if (user != null) {
                 taskObject.author = user.uid
@@ -387,16 +398,16 @@ class DataBase() {
                         if (punish) {
                             userTask.update(
                                 "rating",
-                                (it.get("rating") as Int - 1)
+                                (it.get("rating") as Long - 1)
                             )
                         } else {
                             userTask.update(
                                 "countCoins",
-                                taskObject.reward + (it.get("countCoins") as Int)
+                                taskObject.reward + (it.get("countCoins") as Long)
                             )
                             userTask.update(
                                 "rating",
-                                (it.get("rating") as Int + 1)
+                                (it.get("rating") as Long + 1)
                             )
                         }
 
