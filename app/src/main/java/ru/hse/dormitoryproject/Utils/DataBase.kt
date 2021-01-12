@@ -3,6 +3,7 @@ package ru.hse.dormitoryproject.Utils
 import android.content.Context
 import android.net.Uri
 import android.util.Log
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.DocumentReference
@@ -10,6 +11,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import ru.hse.dormitoryproject.tasksFeeds.TaskObject
+import java.lang.Exception
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.reflect.KFunction1
@@ -193,7 +195,7 @@ class DataBase() {
 
 
                         list.clear()
-                        list.addAll(taskList.filter { x->x.isFavorite==true })
+                        list.addAll(taskList.filter { x -> x.isFavorite == true })
                         dataChangedListener()
 
                         Log.d("READ_BASE", "Success Getting documents.")
@@ -210,44 +212,54 @@ class DataBase() {
             if (user != null) {
                 taskObject.author = user.uid
 
-                // Получаем профиль пользователя
-                val userDocument = db.collection(COLLECTION_USERS).document(user.uid)
+                try {
+                    // Получаем профиль пользователя
+                    val userDocument = db.collection(COLLECTION_USERS).document(user.uid)
 
-                userDocument.get().addOnSuccessListener {
-                    val coins = it.get("countCoins") as Int
+                    userDocument.get().addOnSuccessListener {
+                        val coins = it.get("countCoins") as Long
+                        Log.d("VAL", coins.toString())
+                        val a = 0
+                        if (coins >= taskObject.reward) {
+                            // Add a new document with a generated ID
+                            db.collection(COLLECTION_TASKS).add(taskObject.toMap())
+                                .addOnSuccessListener { task ->
 
-                    if (coins >= taskObject.reward) {
-                        // Add a new document with a generated ID
-                        db.collection(COLLECTION_TASKS).add(taskObject.toMap())
-                            .addOnSuccessListener { task ->
+                                    userDocument.get().addOnSuccessListener {
+                                        // Получаем лист опубликованых задач
+                                        val taskIds: ArrayList<String> =
+                                            it.get("workIds") as ArrayList<String>
+                                        // Добовляем id новой задачи
+                                        taskIds.add(task.id)
+                                        // Обновляем профиль пользователя
+                                        userDocument.update("workIds", taskIds)
+                                        userDocument.update("countCoins", coins - taskObject.reward)
+                                    }
 
-                                userDocument.get().addOnSuccessListener {
-                                    // Получаем лист опубликованых задач
-                                    val taskIds: ArrayList<String> =
-                                        it.get("workIds") as ArrayList<String>
-                                    // Добовляем id новой задачи
-                                    taskIds.add(task.id)
-                                    // Обновляем профиль пользователя
-                                    userDocument.update("workIds", taskIds)
-                                    userDocument.update("countCoins", coins - taskObject.reward)
+                                    Toast.makeText(
+                                        context,
+                                        TOAST_CREATE_TASK_SUCCESS,
+                                        Toast.LENGTH_SHORT
+                                    )
+                                        .show()
+
+                                }.addOnFailureListener {
+                                    Toast.makeText(
+                                        context,
+                                        TOAST_CREATE_TASK_FAIL,
+                                        Toast.LENGTH_SHORT
+                                    )
+                                        .show()
                                 }
 
-                                Toast.makeText(
-                                    context,
-                                    TOAST_CREATE_TASK_SUCCESS,
-                                    Toast.LENGTH_SHORT
-                                )
-                                    .show()
-
-                            }.addOnFailureListener {
-                                Toast.makeText(context, TOAST_CREATE_TASK_FAIL, Toast.LENGTH_SHORT)
-                                    .show()
-                            }
-
-                        Toast.makeText(context, TOAST_MONEY_SUCCESS, Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(context, TOAST_MONEY_FAIL, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, TOAST_MONEY_SUCCESS, Toast.LENGTH_SHORT).show()
+                            successListener()
+                        } else {
+                            Toast.makeText(context, TOAST_MONEY_FAIL, Toast.LENGTH_SHORT).show()
+                        }
                     }
+                } catch (e: Exception) {
+                    Log.e("EXCEP", e.toString() ?: "")
                 }
             }
         }
@@ -260,11 +272,16 @@ class DataBase() {
             // Getting all data from data-base and push this info within Adapter
             db.collection(COLLECTION_TASKS).get()
                 .addOnSuccessListener { result ->
-
+//                    try{
+//                    val taskList = result.toObjects(TaskObject::class.java)
+//                    }
+//                    catch (e : Exception){
+//                        Log.e("ERROR", e.message ?: "")
+//                    }
                     val taskList = result.toObjects(TaskObject::class.java)
 
                     list.clear()
-                    list.addAll(taskList.filter { it.author != user?.uid && it.employee != user?.uid })
+                    list.addAll(taskList.filter { (it.author != user?.uid) && (it.employee != user?.uid) })
                     dataChangedListener()
 
                     Log.d("READ_BASE", "Success Getting tasks.")

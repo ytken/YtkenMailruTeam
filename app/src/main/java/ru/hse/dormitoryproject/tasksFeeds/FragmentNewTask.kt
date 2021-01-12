@@ -1,6 +1,7 @@
 package ru.hse.dormitoryproject.tasksFeeds
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -77,6 +78,11 @@ class FragmentNewTask : DialogFragment() {
             description, rewardVal, "This user", TaskObject.Status.NOT_SELECTED.ordinal,
             "${datePicker.year}-${datePicker.month}-${datePicker.dayOfMonth}", title
         )
-        DataBase.writeTask(context, newTask, ::dismiss)
+        try {
+            DataBase.writeTask(context, newTask, ::dismiss)
+        }
+        catch (e : Exception){
+            Log.e("EXCEPT", e.message ?: "")
+        }
     }
 }

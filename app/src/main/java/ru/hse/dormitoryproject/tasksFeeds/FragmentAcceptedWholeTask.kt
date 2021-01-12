@@ -34,7 +34,7 @@ class FragmentAcceptedWholeTask(
         else{
             employee?.text = currentTask.employee
 
-            if(currentTask.getStatus() == TaskObject.Status.READY){
+            if(currentTask.checkIt() == TaskObject.Status.READY){
                 state?.text = "Готово"
                 state?.setTextColor(Color.parseColor("#00C724"));
 
@@ -51,7 +51,7 @@ class FragmentAcceptedWholeTask(
                     this.dismiss()
                 }
             }
-            else if(currentTask.getStatus() == TaskObject.Status.IN_PROGRESS){
+            else if(currentTask.checkIt() == TaskObject.Status.IN_PROGRESS){
                 state?.text = "Выполняется"
                 state?.setTextColor(Color.parseColor("#C70003"));
             }

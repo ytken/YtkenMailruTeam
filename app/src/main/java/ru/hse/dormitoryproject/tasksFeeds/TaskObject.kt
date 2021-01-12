@@ -11,7 +11,7 @@ data class TaskObject(
     val status: Int = 2,
     val deadline: String = "",
     val title: String = "",
-    val employee: String? = null
+    val employee: String? = ""
 ) {
     @Exclude
     fun toMap(): Map<String, Any?> {
@@ -26,7 +26,7 @@ data class TaskObject(
         )
     }
 
-    fun getStatus() = Status.getByValue(status)
+    fun checkIt() = Status.getByValue(status)
 
     override fun equals(other: Any?): Boolean {
         if (other is TaskObject) {

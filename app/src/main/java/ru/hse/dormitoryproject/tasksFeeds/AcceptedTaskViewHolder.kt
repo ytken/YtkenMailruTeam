@@ -12,11 +12,11 @@ class AcceptedTaskViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView
         itemView.findViewById<TextView>(R.id.feed_task_deadline).text = newObject.deadline
 
         val stateView = itemView.findViewById<TextView>(R.id.feed_task_accepted_is_done)
-        if(newObject.getStatus() == TaskObject.Status.READY){
+        if(newObject.checkIt() == TaskObject.Status.READY){
             stateView.text = "Готово"
             stateView.setTextColor(Color.parseColor("#00C724"));
         }
-        else if(newObject.getStatus() == TaskObject.Status.IN_PROGRESS){
+        else if(newObject.checkIt() == TaskObject.Status.IN_PROGRESS){
             stateView.text = "Выполняется"
             stateView.setTextColor(Color.parseColor("#C70003"));
         }
