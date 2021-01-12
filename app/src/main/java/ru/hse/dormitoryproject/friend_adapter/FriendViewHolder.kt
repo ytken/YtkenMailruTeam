@@ -14,7 +14,6 @@ class FriendViewHolder(itemView: View, protected val listener: IListener) :
     protected val mName: TextView
 
     init {
-
         mName = itemView.findViewById(R.id.item_name)
 
         val clickListener =
