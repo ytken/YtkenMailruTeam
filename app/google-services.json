@@ -15,8 +15,12 @@
       },
       "oauth_client": [
         {
-          "client_id": "903374722668-gpm9729vlpea1hleoqfacd4l45kuqr17.apps.googleusercontent.com",
-          "client_type": 3
+          "client_id": "903374722668-sd2uc465i0d06m3nfgbhumf6kfqrii54.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.hse.dormitoryproject",
+            "certificate_hash": "f65baf3c8d4292ee9139636c790816b5ff2038e1"
+          }
         }
       ],
       "api_key": [
@@ -26,12 +30,7 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "903374722668-gpm9729vlpea1hleoqfacd4l45kuqr17.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
