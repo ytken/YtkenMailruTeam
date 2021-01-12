@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dp"
-    android:layout_height="300dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:minWidth="500dp"
+    android:minHeight="500dp"
     android:orientation="vertical">
 
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/btn_sign_in_google"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
+
+    </com.google.android.gms.common.SignInButton>
+
+    <Button
+        android:id="@+id/btn_sign_in_or_reg_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SignIn Email" />
 
 </LinearLayout>

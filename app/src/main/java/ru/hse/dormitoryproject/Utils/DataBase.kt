@@ -3,16 +3,15 @@ package ru.hse.dormitoryproject.Utils
 import android.content.Context
 import android.net.Uri
 import android.util.Log
-import android.widget.Toast
-import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.reflect.KFunction1
 
 
 class DataBase() {
@@ -34,7 +33,7 @@ class DataBase() {
         private const val PHOTO_STORAGE = "images/"
 
 
-        fun createCurrentUser(context: Context?) {
+        fun createCurrentUser(context: Context?, updateUI: KFunction1<FirebaseUser?, Unit>) {
 
             if (user != null) {
 
@@ -64,6 +63,9 @@ class DataBase() {
 
                             db.collection(COLLECTION_USERS).document(user.uid)
                                 .set(userObject.toMap())
+                                .addOnSuccessListener {
+                                    updateUI.invoke(user)
+                                }
                         }
                     }
             }
