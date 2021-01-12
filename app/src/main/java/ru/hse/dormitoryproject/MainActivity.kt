@@ -72,6 +72,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onStart() {
         super.onStart()
+
         val currentUser = auth.currentUser
         updateUI(currentUser)
     }

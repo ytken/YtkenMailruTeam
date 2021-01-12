@@ -16,7 +16,8 @@ data class UserObject(
     val countCoins: Int? = 0,
     val favoriteIds: ArrayList<String>? = arrayListOf(),
     val postIds: ArrayList<String>? = arrayListOf(),
-    val workIds: ArrayList<String>? = arrayListOf()
+    val workIds: ArrayList<String>? = arrayListOf(),
+    var rating : Int = 1
 
 
 ) {
@@ -32,7 +33,8 @@ data class UserObject(
             "countCoins" to countCoins,
             "favoriteIds" to favoriteIds,
             "postIds" to postIds,
-            "workIds" to workIds
+            "workIds" to workIds,
+            "rating" to rating
         )
     }
 }
