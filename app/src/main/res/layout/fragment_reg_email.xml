@@ -1,48 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:minWidth="350dp"
-    android:minHeight="500dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:minWidth="320dp"
+    android:minHeight="450dp"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_margin="10dp"
         android:layout_weight="3"
         android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/text_email_reg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="email" />
-
-            <TextView
-                android:id="@+id/text_password_reg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="password" />
-
-            <TextView
-                android:id="@+id/text_conf_password_reg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="confirmation password" />
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -52,27 +21,33 @@
 
             <EditText
                 android:id="@+id/editText_email_reg"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textEmailAddress" />
+                android:hint="Email adress"
+                android:inputType="textEmailAddress"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/editText_password_reg"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPassword" />
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/editText_conf_password_reg"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPassword" />
+                android:hint="Confirmation password"
+                android:inputType="textPassword"
+                android:textSize="18sp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -80,12 +55,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5"
+        android:layout_weight="4"
         android:orientation="horizontal"></LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_margin="10dp"
         android:layout_weight="1"
         android:orientation="horizontal">
 
@@ -93,6 +69,16 @@
             android:id="@+id/btn_done_reg_email"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Done" />
+            android:backgroundTint="#D0021B"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:minWidth="130dp"
+            android:minHeight="80dp"
+            android:text="Done"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="#FAFAFA"
+            android:textSize="28sp" />
     </LinearLayout>
 </LinearLayout>

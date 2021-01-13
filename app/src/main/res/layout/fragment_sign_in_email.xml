@@ -1,41 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:minWidth="350dp"
-    android:minHeight="500dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:minWidth="320dp"
+    android:minHeight="450dp"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_margin="10dp"
+        android:layout_weight="2"
         android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/text_email_sign"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Email" />
-
-            <TextView
-                android:id="@+id/text_pass_sign"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Password" />
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -49,6 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:hint="Email adress"
                 android:inputType="textEmailAddress" />
 
             <EditText
@@ -57,6 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:hint="Password"
                 android:inputType="textPassword" />
 
         </LinearLayout>
@@ -66,20 +44,29 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5"
+        android:layout_weight="4.5"
         android:orientation="horizontal"></LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/btn_done_sign_email"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Done" />
+            android:layout_height="wrap_content"
+            android:backgroundTint="#D0021B"
+            android:gravity="center"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:minWidth="130dp"
+            android:minHeight="80dp"
+            android:text="Done"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="#FAFAFA" />
 
     </LinearLayout>
 

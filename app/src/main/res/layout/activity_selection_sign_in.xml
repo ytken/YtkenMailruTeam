@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -18,12 +19,28 @@
         android:id="@+id/btn_sign_in_google"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btn_sign_in_or_reg_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SignIn Email" />
+        android:backgroundTint="#D0021B"
+        android:drawableLeft="@drawable/email_svg_sign_or"
+        android:drawingCacheQuality="high"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center|center_vertical"
+        android:minWidth="300dp"
+        android:minHeight="70dp"
+        android:shadowColor="#FFFFFF"
+        android:text="Sign in Email"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textSize="24sp"
+        android:typeface="normal"
+        app:rippleColor="#FFFFFF" />
+
 
 </LinearLayout>
