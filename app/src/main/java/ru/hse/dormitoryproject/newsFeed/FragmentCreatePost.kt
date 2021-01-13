@@ -21,9 +21,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class FragmentCreatePost(): Fragment()  {
+class FragmentCreatePost() : Fragment() {
     private val PICK_IMAGE = 0
-    private var uri : Uri? = null
+    private var uri: Uri? = null
 
     @SuppressLint("SimpleDateFormat")
     override fun onCreateView(
@@ -48,7 +48,7 @@ class FragmentCreatePost(): Fragment()  {
 
 
             if (tittleText.isEmpty()) {
-                Toast.makeText(it.context , TOAST_NULL_TITTLE, Toast.LENGTH_SHORT).show()
+                Toast.makeText(it.context, TOAST_NULL_TITTLE, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -59,13 +59,15 @@ class FragmentCreatePost(): Fragment()  {
 
             val id = UUID.randomUUID().toString()
 
-            val post = PostObject(id,tittleText, "descriptor", contentText, currentDate, false, author)
-            DataBase.uploadImage(uri ,it.context, post, NAME_COLLECTION)
+            val post =
+                PostObject(id, tittleText, "descriptor", contentText, currentDate, false, author)
+            DataBase.uploadImage(uri, it.context, post, NAME_COLLECTION)
             findNavController().navigate(R.id.feedFragment)
         }
 
 
-        view.findViewById<ImageView>(R.id.choose_pic_img).setOnClickListener { getImage(view.context) }
+        view.findViewById<ImageView>(R.id.choose_pic_img)
+            .setOnClickListener { getImage(view.context) }
 
         return view
     }
@@ -82,29 +84,26 @@ class FragmentCreatePost(): Fragment()  {
     }
 
 
-    private fun getImage(context : Context){
-        try
-        {
+    private fun getImage(context: Context) {
+        try {
             val pickPhoto = Intent(
                 Intent.ACTION_PICK,
                 MediaStore.Images.Media.INTERNAL_CONTENT_URI
             )
             startActivityForResult(pickPhoto, PICK_IMAGE)
-        }
-        catch(e : Exception){
+        } catch (e: Exception) {
             Log.e("EXC", e.message ?: "")
         }
     }
 
-     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         try {
-            super.onActivityResult(requestCode, resultCode, data)
             if (requestCode == PICK_IMAGE) {
                 view?.findViewById<ImageView>(R.id.choose_pic_img)?.setImageURI(data?.data)
                 uri = data?.data
             }
-        }
-        catch(e : Exception){
+        } catch (e: Exception) {
             Log.e("EXC", e.message ?: "")
         }
     }
