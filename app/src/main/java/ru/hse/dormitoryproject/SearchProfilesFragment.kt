@@ -54,7 +54,7 @@ class SearchProfilesFragment : Fragment() {
         recycler = view.findViewById(R.id.recycler_search)
         adapter = FriendAdapter(FriendRepository.instance.list(), object : FriendAdapter.FriendClickedListener {
             override fun friendClicked(friend: FriendItem) {
-                val profileFragment = profileFragment.newInstance(friend)
+                val profileFragment = profileFragment.newInstance(friend, false)
                 activity!!.supportFragmentManager.beginTransaction()
                         .replace(R.id.fragment_search, profileFragment)
                         .addToBackStack(resources.getString(R.string.tag_profile_from_search))

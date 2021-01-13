@@ -68,18 +68,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.213" />
 
-        <Button
-            android:id="@+id/button_login_friends"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:text="@string/button_friends"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            android:visibility="gone"/>
-
         <TextView
             android:id="@+id/textViewSurname"
             android:layout_width="wrap_content"

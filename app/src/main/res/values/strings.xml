@@ -7,11 +7,14 @@
     <string name="default_vk">No info</string>
     <string name="name_default">Login</string>
     <string name="surname_default">Loginovich</string>
-    <string name="button_friends">подписки</string>
     <string name="coin_default">0</string>
     <string name="coin_label">Запас валюты</string>
     <string name="rate_default">1</string>
     <string name="rate_label">Рейтинг</string>
     <string name="search_title">Поиск друзей</string>
     <string name="name">Name</string>
+    <string name="feed_menu_option_news" />
+    <string name="feed_menu_option_subscriptions" />
+    <string name="profile_friends">Подписки</string>
+    <string name="profile_subscribe">Подписаться</string>
 </resources>

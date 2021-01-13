@@ -1,14 +1,15 @@
 package ru.hse.dormitoryproject
 
+import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import ru.hse.dormitoryproject.friend_data.FriendItem
 import ru.hse.dormitoryproject.friend_data.FriendRepository
+
 
 class profileFragment : Fragment() {
 
@@ -24,8 +25,6 @@ class profileFragment : Fragment() {
     lateinit var textRate: TextView
     lateinit var textVK: TextView
     lateinit var imageProf: ImageView
-
-    lateinit var buttonFriends: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,19 +51,11 @@ class profileFragment : Fragment() {
         textVK.text = linkVK
         textRate.text = rateNumber.toString()
         imageProf.setImageResource(R.drawable.nusha)
-
-        /*buttonFriends = v.findViewById(R.id.button_login_friends)
-        buttonFriends.setOnClickListener{
-            val searchFragment = SearchProfilesFragment()
-            Log.d("my", "Button clicked")
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment, searchFragment).addToBackStack(null).commit()
-        }*/
-
         return v
     }
 
     companion object {
-        fun newInstance(friendItem: FriendItem) = profileFragment().apply {
+        fun newInstance(friendItem: FriendItem, flag: Boolean) = profileFragment().apply {
             arguments = Bundle().apply {
                 name = friendItem.name
                 surname = friendItem.surname
