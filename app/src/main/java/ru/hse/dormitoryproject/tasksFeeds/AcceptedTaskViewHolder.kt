@@ -5,10 +5,13 @@ import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ru.hse.dormitoryproject.R
+import ru.hse.dormitoryproject.Utils.DataBase
 
 class AcceptedTaskViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
     fun bind(newObject : TaskObject) {
-        itemView.findViewById<TextView>(R.id.feed_task_accepted_employee_name).text = newObject.author
+        DataBase.getName(newObject){
+            itemView.findViewById<TextView>(R.id.feed_task_accepted_employee_name).text = it
+        }
         itemView.findViewById<TextView>(R.id.feed_task_deadline).text = newObject.deadline
 
         val stateView = itemView.findViewById<TextView>(R.id.feed_task_accepted_is_done)
