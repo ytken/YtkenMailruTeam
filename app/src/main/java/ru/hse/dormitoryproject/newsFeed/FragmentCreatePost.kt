@@ -65,10 +65,6 @@ class FragmentCreatePost() : Fragment() {
             findNavController().navigate(R.id.feedFragment)
         }
 
-
-        view.findViewById<ImageView>(R.id.choose_pic_img)
-            .setOnClickListener { getImage(view.context) }
-
         return view
     }
 
@@ -81,30 +77,5 @@ class FragmentCreatePost() : Fragment() {
         private const val NAME_COLLECTION = "PageWork"
         private const val TOAST_NULL_TITTLE = "Please enter the title before clicking the button"
         private const val TOAST_NULL_CONTENT = "Please enter the content before clicking the button"
-    }
-
-
-    private fun getImage(context: Context) {
-        try {
-            val pickPhoto = Intent(
-                Intent.ACTION_PICK,
-                MediaStore.Images.Media.INTERNAL_CONTENT_URI
-            )
-            startActivityForResult(pickPhoto, PICK_IMAGE)
-        } catch (e: Exception) {
-            Log.e("EXC", e.message ?: "")
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        try {
-            if (requestCode == PICK_IMAGE) {
-                view?.findViewById<ImageView>(R.id.choose_pic_img)?.setImageURI(data?.data)
-                uri = data?.data
-            }
-        } catch (e: Exception) {
-            Log.e("EXC", e.message ?: "")
-        }
     }
 }

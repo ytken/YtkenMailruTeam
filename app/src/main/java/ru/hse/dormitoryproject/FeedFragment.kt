@@ -1,9 +1,12 @@
 package ru.hse.dormitoryproject
 
+import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
@@ -84,54 +87,7 @@ class FeedFragment : Fragment() {
         inflater.inflate(R.menu.feed_menu, menu)
     }
 
-    /**
-     * Метод, который получает с сервера объекты типа PostObject, и возвращает все полученные объекты.
-     */
-    private fun getPosts(): ArrayList<PostObject> {
-        var post = arrayListOf<PostObject>()
-        // Получение записей с сервера
-        post.add(
-            PostObject(
-                "",
-
-                "Тестовый пост #1",
-                "",
-                "описание...",
-                "01.01.0001",
-                false
-            )
-        )
-        post.add(
-            PostObject(
-                "",
-
-                "Тестовый пост #2",
-                "",
-                "описание...",
-                "01.01.0001",
-                false
-            )
-        )
-        post.add(
-            PostObject(
-                "",
-
-                "Тестовый пост #3",
-                "",
-                "описание...",
-                "01.01.0001",
-                false
-            )
-        )
-
-        return post
-    }
-
     companion object FeedFragments{
-        @JvmStatic
-        fun myFyn(){
-
-        }
 
         /**
          * Use this factory method to create a new instance of
