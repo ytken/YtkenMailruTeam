@@ -216,7 +216,7 @@ class DataBase() {
         fun getNameById(name: String?, notifier: (String) -> Unit) {
             if ((name != null) && (name != "")) {
                 db.collection(COLLECTION_USERS).document(name).get().addOnSuccessListener {
-                    notifier(((it.get("name") as String?) ?: "") + ((it.get("surname") as String?) ?: ""))
+                    notifier(((it.get("name") as String? + " ") ?: "") + ((it.get("surname") as String?) ?: ""))
                 }
             } else {
                 notifier(" - ")
