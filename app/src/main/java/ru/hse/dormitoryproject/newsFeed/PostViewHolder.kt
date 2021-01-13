@@ -67,8 +67,6 @@ class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             Picasso.get().load(newObject.storageRef)
                 .into(picture)
         } catch (e: IllegalArgumentException) {
-            Toast.makeText(itemView.context, "Невозможно загрузить изображение", Toast.LENGTH_SHORT)
-                .show()
             picture.setImageResource(R.drawable.your_advertisement)
         }
 

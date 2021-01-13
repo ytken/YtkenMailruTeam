@@ -13,11 +13,12 @@ data class UserObject(
     val phoneNumber: String? = "",
     val photoProfile: String? = "",
     val vk: String? = "",
-    val countCoins: Int? = 0,
+    val countCoins: Long? = 0,
     val favoriteIds: ArrayList<String>? = arrayListOf(),
     val postIds: ArrayList<String>? = arrayListOf(),
     val workIds: ArrayList<String>? = arrayListOf(),
-    var rating : Int = 1
+    val takenTaskIds : ArrayList<String>? = arrayListOf(),
+    var rating : Long = 1
 
 
 ) {
@@ -34,6 +35,7 @@ data class UserObject(
             "favoriteIds" to favoriteIds,
             "postIds" to postIds,
             "workIds" to workIds,
+            "takenTaskIds" to takenTaskIds,
             "rating" to rating
         )
     }

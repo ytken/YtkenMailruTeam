@@ -37,6 +37,8 @@ class FragmentWholePost(private val currentPost : PostObject, private val notifi
             star?.setBackgroundResource(R.drawable.ic_baseline_star_chosen)
         }
 
+        DataBase.loadPhotoIntoViewByUserId(currentPost.author, view?.findViewById(R.id.feed_task_available_prof_pic)!!)
+
         view?.findViewById<ImageView>(R.id.post_add_to_fav)?.setOnClickListener {
             if(currentPost.isFavorite!!){
                 star?.setBackgroundResource(R.drawable.ic_baseline_star_not_chosen);
@@ -60,13 +62,6 @@ class FragmentWholePost(private val currentPost : PostObject, private val notifi
             Toast.makeText(view?.context, "Невозможно загрузить изображение", Toast.LENGTH_SHORT).show()
             picture?.setImageResource(R.drawable.your_advertisement)
         }
-
-        //if(hasPhoto) {
-        //add photo
-        //}
-        //else {
-        //view?.findViewById<ImageView>(R.id.post_pic)?.isVisible=false
-        //}
 
         return view
     }

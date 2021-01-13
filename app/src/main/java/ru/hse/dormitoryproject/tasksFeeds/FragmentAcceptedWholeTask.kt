@@ -23,7 +23,6 @@ class FragmentAcceptedWholeTask(
     ): View? {
         val view = inflater.inflate(R.layout.feed_accepted_task_whole, container, false)
 
-        //Set user pic
         val employee = view?.findViewById<TextView>(R.id.post_employee_name)
         val state = view?.findViewById<TextView>(R.id.feed_task_accepted_is_done)
 
@@ -34,7 +33,7 @@ class FragmentAcceptedWholeTask(
         }
         else{
             DataBase.getNameById(currentTask.employee){
-                view?.findViewById<TextView>(R.id.post_employee_name)?.text = it
+                employee?.text = it
             }
 
             if(currentTask.checkIt() == TaskObject.Status.READY){
@@ -53,10 +52,13 @@ class FragmentAcceptedWholeTask(
                     notifier(false) // Удалить пост из списка постов/изменить значение в базе
                     this.dismiss()
                 }
+
+                DataBase.loadPhotoIntoViewByUserId(currentTask.employee, view.findViewById(R.id.feed_task_accepted_employee_prof_pic))
             }
             else if(currentTask.checkIt() == TaskObject.Status.IN_PROGRESS){
                 state?.text = "Выполняется"
                 state?.setTextColor(Color.parseColor("#C70003"));
+                DataBase.loadPhotoIntoViewByUserId(currentTask.employee, view.findViewById(R.id.feed_task_accepted_employee_prof_pic))
             }
         }
 

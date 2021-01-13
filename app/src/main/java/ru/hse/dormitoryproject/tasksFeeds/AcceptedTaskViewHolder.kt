@@ -18,10 +18,12 @@ class AcceptedTaskViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView
         if(newObject.checkIt() == TaskObject.Status.READY){
             stateView.text = "Готово"
             stateView.setTextColor(Color.parseColor("#00C724"));
+            DataBase.loadPhotoIntoViewByUserId(newObject.employee, itemView.findViewById(R.id.feed_task_accepted_employee_prof_pic))
         }
         else if(newObject.checkIt() == TaskObject.Status.IN_PROGRESS){
             stateView.text = "Выполняется"
             stateView.setTextColor(Color.parseColor("#C70003"));
+            DataBase.loadPhotoIntoViewByUserId(newObject.employee, itemView.findViewById(R.id.feed_task_accepted_employee_prof_pic))
         }
         else{
             stateView.text = "Ожидает исполнителя"

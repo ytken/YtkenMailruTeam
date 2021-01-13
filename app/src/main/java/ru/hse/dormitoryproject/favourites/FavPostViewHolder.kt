@@ -22,7 +22,7 @@ class FavPostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
         val btn = itemView.findViewById<ImageButton>(R.id.post_add_to_fav)
 
-
+        DataBase.loadPhotoIntoViewByUserId(newObject.author, itemView.findViewById(R.id.feed_task_available_prof_pic))
 
 
         if (newObject.isFavorite!!) {
@@ -64,7 +64,6 @@ class FavPostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 .into(picture)
         }
         catch (e : IllegalArgumentException){
-            Toast.makeText(itemView.context, "Невозможно загрузить изображение", Toast.LENGTH_SHORT).show()
             picture.setImageResource(R.drawable.your_advertisement)
         }
 

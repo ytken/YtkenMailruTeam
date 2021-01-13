@@ -30,6 +30,8 @@ class FragmentYourWholeTask(
             currentTask.description
         view?.findViewById<TextView>(R.id.feed_task_your_deadline)?.text = currentTask.deadline
 
+        DataBase.loadPhotoIntoViewByUserId(currentTask.author, view?.findViewById(R.id.feed_task_available_prof_pic)!!)
+
         view?.findViewById<Button>(R.id.feed_task_take_btn)?.setOnClickListener {
             // Удалить пост из списка постов/изменить значение в базе
             notifier()

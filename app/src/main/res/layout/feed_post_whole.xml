@@ -16,10 +16,12 @@
 
         <ImageView
             android:id="@+id/feed_task_available_prof_pic"
+            android:background="@drawable/round_outline"
+            android:outlineProvider="background"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_margin="10dp"
-            android:scaleType="centerInside"
+            android:scaleType="centerCrop"
             android:src="@drawable/ic_task_def_prof_pic_face" />
 
         <HorizontalScrollView

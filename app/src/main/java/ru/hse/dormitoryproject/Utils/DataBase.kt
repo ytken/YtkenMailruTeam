@@ -10,8 +10,10 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import ru.hse.dormitoryproject.tasksFeeds.TaskObject
 import java.lang.Exception
@@ -147,8 +149,8 @@ class DataBase() {
         ) {
 
 
-            val favList = getCurrentUser()!!.get().addOnSuccessListener {
-                val favList = it.get("favoriteIds") as ArrayList<String>
+            getCurrentUser()!!.get().addOnSuccessListener {
+                val favList = it.get("favoriteIds") as ArrayList<String>?
 
 
                 db.collection(COLLECTION_FEEDS).get()
@@ -156,7 +158,7 @@ class DataBase() {
 
                         val taskList = result.toObjects(PostObject::class.java)
                         for (obj in taskList) {
-                            if (favList.contains(obj.postID))
+                            if (favList != null && favList.contains(obj.postID))
                                 obj.isFavorite = true
                         }
 
@@ -223,12 +225,13 @@ class DataBase() {
 
         fun loadPhotoIntoViewByUserId(name: String?, view: ImageView) {
             if ((name != null) && (name != "")) {
-//                db.collection(COLLECTION_USERS).document(name).get().addOnSuccessListener {
-//                    val picId = (it.get("photoProfile") as String?) ?: ""
-//                    if (picId != "") {
-//                        Picasso.get().load(picId).into(view) // Оно так лагает... как будто не делает это в другом потоке. А оно делает?
-//                    } // TODO: посмотреть, что можно сделать
-//                }
+                db.collection(COLLECTION_USERS).document(name).get().addOnSuccessListener {
+                    val picId = (it.get("photoProfile") as String?) ?: ""
+                    if (picId != "") {
+                        Picasso.get().load(picId).into(view) // Оно так лагает... как будто не делает это в другом потоке. А оно делает?
+                        view.clipToOutline = true
+                    } // TODO: посмотреть, что можно сделать
+                }
             }
         }
 
@@ -368,10 +371,12 @@ class DataBase() {
 
             db.collection(COLLECTION_TASKS).get()
                 .addOnSuccessListener { result ->
+                    var index = 0
                     for (i in result) {
-                        if ((result.toObjects(TaskObject::class.java)).equals(taskObject)) {
+                        val item = result.toObjects(TaskObject::class.java)[index]
+                        if (taskObject.equals(item)) {
                             db.collection(COLLECTION_TASKS).document(i.id).apply {
-                                update("status", TaskObject.Status.IN_PROGRESS)
+                                update("status", TaskObject.Status.IN_PROGRESS.ordinal)
                                 update("employee", user.uid) // Обновляем данные поста
 
                                 userTask.get().addOnSuccessListener { result ->
@@ -385,6 +390,7 @@ class DataBase() {
                                 }
                             }
                         }
+                        ++index
                     }
                 }
         }
@@ -397,14 +403,15 @@ class DataBase() {
             val userTask = db.collection(COLLECTION_USERS).document(taskObject.employee!!)
 
             var id = ""
-
+            var index = 0
             db.collection(COLLECTION_TASKS).get()
                 .addOnSuccessListener { result ->
                     for (i in result) {
-                        if ((result.toObjects(TaskObject::class.java)).equals(taskObject)) {
+                        if (taskObject.equals((result.toObjects(TaskObject::class.java))[index])) {
                             id = i.id
                             break;
                         }
+                        ++index
                     }
 
                     userTask.get().addOnSuccessListener {
@@ -437,7 +444,7 @@ class DataBase() {
                         .addOnSuccessListener {
                             val tasks = it.get("workIds") as ArrayList<String>
                             tasks.remove(id)
-                            userTask.update(
+                            db.collection(COLLECTION_USERS).document(user.uid).update(
                                 "workIds",
                                 tasks
                             )
@@ -466,7 +473,7 @@ class DataBase() {
                     }
 
                     db.collection(COLLECTION_TASKS).document(id).apply {
-                        update("status", TaskObject.Status.READY)
+                        update("status", TaskObject.Status.READY.ordinal)
 
                         userTask.get().addOnSuccessListener { result ->
 

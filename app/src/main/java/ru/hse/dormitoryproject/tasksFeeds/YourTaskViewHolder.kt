@@ -3,6 +3,7 @@ package ru.hse.dormitoryproject.tasksFeeds
 import android.graphics.Color
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ru.hse.dormitoryproject.R
@@ -17,7 +18,8 @@ class YourTaskViewHolder(itemView: View, val notify: () -> Unit) :
         itemView.findViewById<TextView>(R.id.feed_task_your_title).text = newObject.title
         itemView.findViewById<TextView>(R.id.feed_task_your_text).text = newObject.description
         itemView.findViewById<TextView>(R.id.feed_task_deadline).text = newObject.deadline
-        itemView.findViewById<Button>(R.id.feed_task_accepted_is_done)
+        DataBase.loadPhotoIntoViewByUserId(newObject.author, itemView.findViewById(R.id.feed_task_your_employee_prof_pic))
+        itemView.findViewById<Button>(R.id.feed_task_is_done_btn)
             .setOnClickListener { DataBase.tellAboutTaskCompletion(newObject);notify() }
     }
 }

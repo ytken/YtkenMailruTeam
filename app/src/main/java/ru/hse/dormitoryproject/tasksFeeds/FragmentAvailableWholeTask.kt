@@ -30,6 +30,7 @@ class FragmentAvailableWholeTask(
             currentTask.description
         view?.findViewById<TextView>(R.id.feed_task_reward)?.text = currentTask.reward.toString()
         view?.findViewById<TextView>(R.id.feed_task_available_deadline)?.text = currentTask.deadline
+        DataBase.loadPhotoIntoViewByUserId(currentTask.author, view?.findViewById(R.id.feed_task_available_prof_pic)!!)
 
         view?.findViewById<Button>(R.id.feed_task_take_btn)?.setOnClickListener {
             DataBase.takeTaskByUser(currentTask)
