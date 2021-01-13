@@ -60,7 +60,7 @@ class FragmentAvailableTasksFeed : Fragment() {
             R.color.fourth_refresh_color
         )
         refresh.setOnRefreshListener {
-            DataBase.readAllTasks(list) { adapter.notifyDataSetChanged() }
+            DataBase.readAllTasks(list) { adapter.notifyDataSetChanged(); refresh.isRefreshing = false }
         }
 
         // Inflate the layout for this fragment

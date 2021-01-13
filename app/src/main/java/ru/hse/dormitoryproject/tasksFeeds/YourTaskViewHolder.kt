@@ -11,7 +11,9 @@ import ru.hse.dormitoryproject.Utils.DataBase
 class YourTaskViewHolder(itemView: View, val notify: () -> Unit) :
     RecyclerView.ViewHolder(itemView) {
     fun bind(newObject: TaskObject) {
-        itemView.findViewById<TextView>(R.id.feed_task_your_employer_name).text = newObject.author
+        DataBase.getNameById(newObject.author){
+            itemView.findViewById<TextView>(R.id.feed_task_your_employer_name).text = it
+        }
         itemView.findViewById<TextView>(R.id.feed_task_your_title).text = newObject.title
         itemView.findViewById<TextView>(R.id.feed_task_your_text).text = newObject.description
         itemView.findViewById<TextView>(R.id.feed_task_deadline).text = newObject.deadline

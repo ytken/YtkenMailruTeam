@@ -36,6 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginStart="5dp"
+        android:text=" - "
         android:textSize="@dimen/post_auth_name_text_size"
         android:textStyle="bold" />
 

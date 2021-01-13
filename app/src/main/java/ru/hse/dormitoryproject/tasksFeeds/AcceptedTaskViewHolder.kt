@@ -9,7 +9,7 @@ import ru.hse.dormitoryproject.Utils.DataBase
 
 class AcceptedTaskViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
     fun bind(newObject : TaskObject) {
-        DataBase.getName(newObject){
+        DataBase.getNameById(newObject.employee){
             itemView.findViewById<TextView>(R.id.feed_task_accepted_employee_name).text = it
         }
         itemView.findViewById<TextView>(R.id.feed_task_deadline).text = newObject.deadline

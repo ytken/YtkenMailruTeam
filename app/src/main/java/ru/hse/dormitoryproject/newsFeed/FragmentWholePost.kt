@@ -14,6 +14,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import com.squareup.picasso.Picasso
 import ru.hse.dormitoryproject.R
+import ru.hse.dormitoryproject.Utils.DataBase
 import ru.hse.dormitoryproject.Utils.PostObject
 import java.lang.IllegalArgumentException
 
@@ -26,7 +27,9 @@ class FragmentWholePost(private val currentPost : PostObject, private val notifi
     ): View? {
         val view = inflater.inflate(R.layout.feed_post_whole, container, false)
 
-        view?.findViewById<TextView>(R.id.post_author_name)?.text=currentPost.author
+        DataBase.getNameById(currentPost.author){
+            view?.findViewById<TextView>(R.id.post_author_name)?.text=it
+        }
         view?.findViewById<TextView>(R.id.post_date_text)?.text=currentPost.dateOfPublish
 
         val star = view?.findViewById<ImageView>(R.id.post_add_to_fav)

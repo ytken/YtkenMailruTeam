@@ -50,7 +50,7 @@ class FragmentYourTasksFeed : Fragment() {
         val refresh = view.findViewById<SwipeRefreshLayout>(R.id.swipeRefresh)
         refresh.setColorScheme(R.color.first_refresh_color, R.color.second_refresh_color, R.color.third_refresh_color, R.color.fourth_refresh_color)
         refresh.setOnRefreshListener {
-            DataBase.readAllTasksPerformedByUser(list) { adapter.notifyDataSetChanged() }
+            DataBase.readAllTasksPerformedByUser(list) { adapter.notifyDataSetChanged();refresh.isRefreshing = false }
         }
 
         view?.findViewById<RecyclerView>(R.id.feed_recycler)?.apply {

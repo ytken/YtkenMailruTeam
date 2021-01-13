@@ -3,6 +3,8 @@ package ru.hse.dormitoryproject.Utils
 import android.content.Context
 import android.net.Uri
 import android.util.Log
+import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -10,6 +12,7 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import com.squareup.picasso.Picasso
 import ru.hse.dormitoryproject.tasksFeeds.TaskObject
 import java.lang.Exception
 import java.util.*
@@ -89,7 +92,7 @@ class DataBase() {
 
         private fun writePost(context: Context?, postObject: PostObject) {
             if (user != null) {
-
+                postObject.author = user.uid
                 // Add a new document with ID
                 db.collection(COLLECTION_FEEDS).document(postObject.postID!!).set(postObject)
 
@@ -208,14 +211,24 @@ class DataBase() {
             }
         }
 
-        fun getName(taskObject: TaskObject, notifier : (String) -> Unit){
-            if ((taskObject.employee != null) && (taskObject.employee != "")){
-                db.collection(COLLECTION_USERS).document(taskObject.employee).get().addOnSuccessListener{
-                    notifier(it.get("employee") as String)
+        fun getNameById(name: String?, notifier: (String) -> Unit) {
+            if ((name != null) && (name != "")) {
+                db.collection(COLLECTION_USERS).document(name).get().addOnSuccessListener {
+                    notifier(((it.get("name") as String?) ?: "") + ((it.get("surname") as String?) ?: ""))
                 }
-            }
-            else{
+            } else {
                 notifier(" - ")
+            }
+        }
+
+        fun loadPhotoIntoViewByUserId(name: String?, view: ImageView) {
+            if ((name != null) && (name != "")) {
+//                db.collection(COLLECTION_USERS).document(name).get().addOnSuccessListener {
+//                    val picId = (it.get("photoProfile") as String?) ?: ""
+//                    if (picId != "") {
+//                        Picasso.get().load(picId).into(view) // Оно так лагает... как будто не делает это в другом потоке. А оно делает?
+//                    } // TODO: посмотреть, что можно сделать
+//                }
             }
         }
 

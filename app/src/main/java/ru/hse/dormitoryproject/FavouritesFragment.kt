@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import ru.hse.dormitoryproject.Utils.DataBase
 import ru.hse.dormitoryproject.Utils.PostObject
 import ru.hse.dormitoryproject.favourites.FavPostAdapter
@@ -57,6 +58,13 @@ class FavouritesFragment : Fragment() {
         }
 
         updateFavorites.invoke()
+
+        val refresh = view.findViewById<SwipeRefreshLayout>(R.id.swipeRefresh)
+        refresh.setColorScheme(R.color.first_refresh_color, R.color.second_refresh_color, R.color.third_refresh_color, R.color.fourth_refresh_color)
+        refresh.setOnRefreshListener {
+            updateFavorites.invoke()
+            refresh.isRefreshing = false
+        }
 
 
         view?.findViewById<RecyclerView>(R.id.feed_recycler)?.apply {

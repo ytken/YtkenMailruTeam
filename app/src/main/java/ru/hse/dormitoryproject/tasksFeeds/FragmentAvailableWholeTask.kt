@@ -22,7 +22,9 @@ class FragmentAvailableWholeTask(
         val view = inflater.inflate(R.layout.feed_available_task_whole, container, false)
 
         //Set user pic
-        view?.findViewById<TextView>(R.id.post_author_name)?.text = currentTask.author
+        DataBase.getNameById(currentTask.author){
+            view?.findViewById<TextView>(R.id.post_author_name)?.text = it
+        }
         view?.findViewById<TextView>(R.id.feed_task_available_disc_title)?.text = currentTask.title
         view?.findViewById<TextView>(R.id.feed_task_available_disc_text)?.text =
             currentTask.description

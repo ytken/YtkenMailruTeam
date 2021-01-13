@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.EditText
@@ -82,16 +83,29 @@ class FragmentCreatePost(): Fragment()  {
 
 
     private fun getImage(context : Context){
-        val pickPhoto = Intent(Intent.ACTION_PICK,
-            MediaStore.Images.Media.INTERNAL_CONTENT_URI)
-        startActivityForResult(pickPhoto, PICK_IMAGE)
+        try
+        {
+            val pickPhoto = Intent(
+                Intent.ACTION_PICK,
+                MediaStore.Images.Media.INTERNAL_CONTENT_URI
+            )
+            startActivityForResult(pickPhoto, PICK_IMAGE)
+        }
+        catch(e : Exception){
+            Log.e("EXC", e.message ?: "")
+        }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == PICK_IMAGE) {
-            view?.findViewById<ImageView>(R.id.choose_pic_img)?.setImageURI(data?.data)
-            uri = data?.data
+     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        try {
+            super.onActivityResult(requestCode, resultCode, data)
+            if (requestCode == PICK_IMAGE) {
+                view?.findViewById<ImageView>(R.id.choose_pic_img)?.setImageURI(data?.data)
+                uri = data?.data
+            }
+        }
+        catch(e : Exception){
+            Log.e("EXC", e.message ?: "")
         }
     }
 }

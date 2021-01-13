@@ -52,7 +52,7 @@ class FragmentAcceptedTasksFeed : Fragment() {
         val refresh = view.findViewById<SwipeRefreshLayout>(R.id.swipeRefresh)
         refresh.setColorScheme(R.color.first_refresh_color, R.color.second_refresh_color, R.color.third_refresh_color, R.color.fourth_refresh_color)
         refresh.setOnRefreshListener {
-            DataBase.readAllTasksMadeByUser(list) { adapter.notifyDataSetChanged() }
+            DataBase.readAllTasksMadeByUser(list) { adapter.notifyDataSetChanged();refresh.isRefreshing = false }
         }
 
         // не доделал

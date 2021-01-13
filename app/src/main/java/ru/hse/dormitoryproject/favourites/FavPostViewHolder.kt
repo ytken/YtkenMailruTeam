@@ -16,8 +16,10 @@ class FavPostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(newObject: PostObject, changer: (PostObject) -> Unit) {
         itemView.findViewById<TextView>(R.id.post_title_name).text = newObject.title
         itemView.findViewById<TextView>(R.id.post_desc_text).text = newObject.content
-        itemView.findViewById<TextView>(R.id.post_date_text).text = newObject.dateOfPublish;
-        itemView.findViewById<TextView>(R.id.post_author_name).text = newObject.author;
+        itemView.findViewById<TextView>(R.id.post_date_text).text = newObject.dateOfPublish
+        DataBase.getNameById(newObject.author){
+            itemView.findViewById<TextView>(R.id.post_author_name).text = it
+        }
         val btn = itemView.findViewById<ImageButton>(R.id.post_add_to_fav)
 
 

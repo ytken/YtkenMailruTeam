@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import ru.hse.dormitoryproject.R
+import ru.hse.dormitoryproject.Utils.DataBase
 
 class FragmentAcceptedWholeTask(
     private val currentTask: TaskObject,
@@ -32,7 +33,9 @@ class FragmentAcceptedWholeTask(
             state?.setTextColor(Color.parseColor("#636363"));
         }
         else{
-            employee?.text = currentTask.employee
+            DataBase.getNameById(currentTask.employee){
+                view?.findViewById<TextView>(R.id.post_employee_name)?.text = it
+            }
 
             if(currentTask.checkIt() == TaskObject.Status.READY){
                 state?.text = "Готово"
